@@ -1,10 +1,12 @@
 <template>
   <SimpleHeader />
-  <h1>Game is under construction, sorry! 😟</h1>
+  <CompassGame />
 </template>
 
 <script setup>
 import SimpleHeader from "@/components/SimpleHeader";
+import CompassGame from "@/games/CompassGame";
+
 
 
 </script>

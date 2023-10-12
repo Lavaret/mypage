@@ -9,6 +9,7 @@
 <style>
 body {
   background-color: #222630;
+  height: 100vh;
 }
 
 #app {
@@ -17,5 +18,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: antiquewhite;
+  height: 100vh;
 }
+
+a {
+  cursor: pointer;
+}
+
 </style>
