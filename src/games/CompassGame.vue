@@ -1,26 +1,27 @@
 <template>
 
+  <InfoCaption class="w-5/6 m-auto">
+    <p class="text-xs">Photo by
+      <a class="info-link " href="https://unsplash.com/@thissillygirlskitchen?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Dana DeVolk</a>
+      on
+      <a class="info-link" href="https://unsplash.com/photos/JBqC2n_0zHM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+    </p>
+  </InfoCaption>
   <div class="bg-cover bg-center block m-auto shadow rounded relative m-6 w-5/6 h-5/6"
        :style="{'background-image':'url(/img/table.png)'}">
 
-    <InfoCaption>
-      <p class="text-xs">Photo by
-        <a class="info-link " href="https://unsplash.com/@thissillygirlskitchen?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Dana DeVolk</a>
-        on
-        <a class="info-link" href="https://unsplash.com/photos/JBqC2n_0zHM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-      </p>
-    </InfoCaption>
 
-    <div class="pt-20">
-      <div class="question bg-gray-900 p-1 text-lg m-auto rounded shadow">Where can you be if the compass works this way?</div>
+
+    <div class="p-20 w-full flex justify-center">
+      <div class="question transition ease-in-out delay-150 hover:scale-125 duration-500 bg-gray-900 p-2 absolute rounded shadow text-lg m-auto rounded shadow">Where can you be if the compass works this way?</div>
     </div>
 
-    <img width="250" class="compass absolute shadow" :src="compassImage">
+    <img width="250" class="compass absolute" :src="compassImage">
     <img width="26" class="compass-arrow absolute" :src="compassArrowImage">
 
     <div class="p-2 w-full absolute answer-input">
       <div class="bg-gray-900 rounded shadow p-2">
-        <p :class="{'text-green-500' : answer !== '' && isValid === true, 'text-red-500' : answer !== '' && isValid === false}" class="text-left w-full">{{note}}</p>
+        <p :class="{'text-green-500' : isValid === true, 'text-red-500' : isValid === false}" class="text-left w-full mb-2">{{note}}</p>
         <input @keydown.enter="checkAnswer" v-model="answer" class="bg-gray-800 h-8 w-full p-2 rounded shadow">
       </div>
     </div>
@@ -35,21 +36,37 @@
 import InfoCaption from "@/components/InfoCaption";
 import compassImage from "/public/img/compass.png";
 import compassArrowImage from '/public/img/compass-arrow.png';
+import { getRandomWrong } from '@/composables/reactions';
+
 import { ref } from 'vue';
 
 let answer = ref('');
 let note = ref("Type your answer here:");
 let isValid = ref(null);
+let previousAnswer = ref('');
 
 function checkAnswer() {
   let newAnswer = answer.value;
+
+  if(newAnswer === previousAnswer.value) {
+    return;
+  }
+
+  if(newAnswer === '') {
+    note.value = 'Type your answer here:';
+    isValid.value = null;
+    return;
+  }
+
   if(newAnswer.toLowerCase().replace(/\s/g, "").includes('pole')) {
     note.value = "Great";
     isValid.value = true;
   } else {
-    note.value = "Try again";
+    note.value = getRandomWrong();
     isValid.value = false;
   }
+
+  previousAnswer.value = newAnswer;
 }
 
 
