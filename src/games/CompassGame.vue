@@ -1,13 +1,13 @@
 <template>
 
-  <InfoCaption class="w-5/6 m-auto">
+  <InfoCaption class="w-5/6 m-auto max-w-5xl">
     <p class="text-xs">Photo by
       <a class="info-link " href="https://unsplash.com/@thissillygirlskitchen?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Dana DeVolk</a>
       on
       <a class="info-link" href="https://unsplash.com/photos/JBqC2n_0zHM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
     </p>
   </InfoCaption>
-  <div class="bg-cover bg-center block m-auto shadow rounded relative m-6 w-5/6 h-5/6"
+  <div class="bg-cover bg-center block m-auto shadow rounded relative m-6 w-5/6 h-5/6 max-w-5xl"
        :style="{'background-image':'url(/img/table.png)'}">
 
 

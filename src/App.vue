@@ -1,9 +1,10 @@
 <template>
   <router-view></router-view>
+  <FooterComponent></FooterComponent>
 </template>
 
 <script setup>
-
+import FooterComponent from '@/components/FooterComponent';
 </script>
 
 <style>
