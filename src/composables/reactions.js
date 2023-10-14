@@ -25,3 +25,7 @@ export const goodAnswers = [
 export function getRandomWrong() {
     return wrongAnswers[Math.floor(Math.random()*wrongAnswers.length)];
 }
+
+export function getRandomGood() {
+    return goodAnswers[Math.floor(Math.random()*goodAnswers.length)];
+}

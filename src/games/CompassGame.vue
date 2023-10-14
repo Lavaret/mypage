@@ -36,7 +36,9 @@
 import InfoCaption from "@/components/InfoCaption";
 import compassImage from "/public/img/compass.png";
 import compassArrowImage from '/public/img/compass-arrow.png';
-import { getRandomWrong } from '@/composables/reactions';
+import sha256 from 'crypto-js/sha256';
+import { getRandomWrong, getRandomGood } from '@/composables/reactions';
+import { compass } from "@/composables/answers";
 
 import { ref } from 'vue';
 
@@ -58,8 +60,12 @@ function checkAnswer() {
     return;
   }
 
-  if(newAnswer.toLowerCase().replace(/\s/g, "").includes('pole')) {
-    note.value = "Great";
+  let hash = sha256(newAnswer.toLowerCase().replace(/\s/g, "")).toString();
+
+  console.log(compass.find((e) => e === hash));
+
+  if(compass.find((e) => e === hash)) {
+    note.value = getRandomGood();
     isValid.value = true;
   } else {
     note.value = getRandomWrong();
