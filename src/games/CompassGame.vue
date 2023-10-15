@@ -13,13 +13,15 @@
 
 
     <div class="p-20 w-full flex justify-center">
-      <div class="question transition ease-in-out delay-150 hover:scale-125 duration-500 bg-gray-900 p-2 absolute rounded shadow text-lg m-auto rounded shadow">Where can you be if the compass works this way?</div>
+      <div class="question z-10 transition ease-in-out delay-150 hover:scale-125 duration-500 bg-gray-900 p-2 absolute rounded shadow text-lg m-auto rounded shadow">
+        Where can you be if the compass doesn't work?
+      </div>
     </div>
 
     <img width="250" class="compass absolute" :src="compassImage">
     <img width="26" class="compass-arrow absolute" :src="compassArrowImage">
 
-    <div class="p-2 w-full absolute answer-input">
+    <div class="p-2 w-full z-10 absolute answer-input">
       <div class="bg-gray-900 rounded shadow p-2">
         <p :class="{'text-green-500' : isValid === true, 'text-red-500' : isValid === false}" class="text-left w-full mb-2">{{note}}</p>
         <input @keydown.enter="checkAnswer" v-model="answer" class="bg-gray-800 h-8 w-full p-2 rounded shadow">
@@ -62,8 +64,6 @@ function checkAnswer() {
 
   let hash = sha256(newAnswer.toLowerCase().replace(/\s/g, "")).toString();
 
-  console.log(compass.find((e) => e === hash));
-
   if(compass.find((e) => e === hash)) {
     note.value = getRandomGood();
     isValid.value = true;
@@ -79,6 +79,7 @@ function checkAnswer() {
 </script>
 
 <style scoped>
+
 .info-link {
   @apply hover:underline underline-offset-2;
 }
@@ -136,5 +137,24 @@ function checkAnswer() {
   100% {
     transform: rotate(360deg);
   }
+}
+
+@media screen and (max-height: 680px) {
+  .answer-input {
+    top: 400px;
+  }
+
+  div.bg-cover {
+    min-height: 500px;
+  }
+
+  .compass {
+    top: 103px;
+  }
+
+  .compass-arrow {
+    top: 208px;
+  }
+
 }
 </style>
