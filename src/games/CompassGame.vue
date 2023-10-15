@@ -22,10 +22,7 @@
     <img width="26" class="compass-arrow absolute" :src="compassArrowImage">
 
     <div class="p-2 w-full z-10 absolute answer-input">
-      <div class="bg-gray-900 rounded shadow p-2">
-        <p :class="{'text-green-500' : isValid === true, 'text-red-500' : isValid === false}" class="text-left w-full mb-2">{{note}}</p>
-        <input @keydown.enter="checkAnswer" v-model="answer" class="bg-gray-800 h-8 w-full p-2 rounded shadow">
-      </div>
+      <answer-input :isValid="isValid" :note="note" @providedAnswer="checkAnswer"></answer-input>
     </div>
 
 
@@ -36,46 +33,29 @@
 <script setup>
 
 import InfoCaption from "@/components/InfoCaption";
+import AnswerInput from "@/components/AnswerInput";
 import compassImage from "/public/img/compass.png";
 import compassArrowImage from '/public/img/compass-arrow.png';
-import sha256 from 'crypto-js/sha256';
-import { getRandomWrong, getRandomGood } from '@/composables/reactions';
 import { compass } from "@/composables/answers";
 import { ref, defineEmits } from 'vue';
+import { validateAnswer } from "@/composables/validateAnswer";
 
-let answer = ref('');
 let note = ref("Type your answer here:");
-let isValid = ref(null);
 let previousAnswer = ref('');
 const emit = defineEmits(['correctAnswer'])
+let isValid = ref(null);
 
 
-function checkAnswer() {
-  let newAnswer = answer.value;
+function checkAnswer(answer) {
+  let validated = validateAnswer(answer, compass, previousAnswer.value, isValid.value, note.value);
 
-  if(newAnswer === previousAnswer.value && isValid.value === false) {
-    return;
+  previousAnswer.value = validated.previousAnswer;
+  isValid.value = validated.isValid;
+  note.value = validated.note;
+
+  if(validated.isValid) {
+    emit('correctAnswer', 'Post Office');
   }
-
-  if(newAnswer === '') {
-    note.value = 'Type your answer here:';
-    isValid.value = null;
-    return;
-  }
-
-  let hash = sha256(newAnswer.toLowerCase().replace(/\s/g, "")).toString();
-
-  if(compass.find((e) => e === hash)) {
-    note.value = getRandomGood();
-    isValid.value = true;
-
-    emit('correctAnswer', 'Post Office')
-  } else {
-    note.value = getRandomWrong();
-    isValid.value = false;
-  }
-
-  previousAnswer.value = newAnswer;
 }
 
 
