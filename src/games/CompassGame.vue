@@ -13,7 +13,7 @@
 
 
     <div class="p-20 w-full flex justify-center">
-      <div class="question z-10 transition ease-in-out delay-150 hover:scale-125 duration-500 bg-gray-900 p-2 absolute rounded shadow text-lg m-auto rounded shadow">
+      <div class="question z-10 transition ease-in-out delay-150 hover:scale-125 duration-500 bg-gray-900 p-2 absolute rounded shadow text-lg m-auto">
         Where can you be if the compass doesn't work?
       </div>
     </div>
