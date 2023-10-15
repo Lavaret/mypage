@@ -41,18 +41,19 @@ import compassArrowImage from '/public/img/compass-arrow.png';
 import sha256 from 'crypto-js/sha256';
 import { getRandomWrong, getRandomGood } from '@/composables/reactions';
 import { compass } from "@/composables/answers";
-
-import { ref } from 'vue';
+import { ref, defineEmits } from 'vue';
 
 let answer = ref('');
 let note = ref("Type your answer here:");
 let isValid = ref(null);
 let previousAnswer = ref('');
+const emit = defineEmits(['correctAnswer'])
+
 
 function checkAnswer() {
   let newAnswer = answer.value;
 
-  if(newAnswer === previousAnswer.value) {
+  if(newAnswer === previousAnswer.value && isValid.value === false) {
     return;
   }
 
@@ -67,6 +68,8 @@ function checkAnswer() {
   if(compass.find((e) => e === hash)) {
     note.value = getRandomGood();
     isValid.value = true;
+
+    emit('correctAnswer', 'Post Office')
   } else {
     note.value = getRandomWrong();
     isValid.value = false;
