@@ -7,7 +7,7 @@
     </div>
   </div>
 
-  <InfoCaption class="w-3/4 m-auto max-w-5xl">
+  <InfoCaption class="caption w-3/4 m-auto max-w-5xl">
     <p class="text-xs">Stamp from photo by
       <a class="info-link " href="https://unsplash.com/@anniespratt?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Annie Spratt</a>
       on
@@ -23,7 +23,7 @@
     <div class=" p-2 flex justify-end">
       <div class="address">
         <p>Miss Chloe Rose</p>
-        <p>15 Cromwell Road</p>
+        <p>10, Cromwell Road</p>
         <p>London, SW7 5BD</p>
         <p>England</p>
       </div>
@@ -70,6 +70,10 @@ function checkAnswer(answer) {
   max-width: 600px;
   min-width: 200px;
   color: #222630;
+}
+
+.caption {
+  max-width: 600px;
 }
 
 .address {
