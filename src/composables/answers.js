@@ -12,4 +12,6 @@ export const compass = [
 export const stamp = [
     '4f4a3854dd3e16e664eec1345ce4844ce6d7d54b558c70f00fcd02abbff7b43c', //no question mark
     'fe07185bb5b34f497a7a447e104790d3b9cf3dd178332ba5cc5195b78382da0a', //with qm
+    '69e8713b2d833a1df2de72eb88dcfbf510f67ce7363576e24900a33f6d7bbcde', //opt2
+    '0e71cbf9f0b49cc1f9fc38cb0a04199a61b1dda887e80da27933ea46e7523456', //opt2.
 ];

@@ -23,8 +23,8 @@
     <div class=" p-2 flex justify-end">
       <div class="address">
         <p>Miss Chloe Rose</p>
-        <p>10, Cromwell Road</p>
-        <p>London, SW7 5BD</p>
+        <p>13 Cromwell Road</p>
+        <p>London, SW3 5SD</p>
         <p>England</p>
       </div>
     </div>

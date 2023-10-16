@@ -8,13 +8,15 @@ export const wrongAnswers = [
     'Unfortunately not 😣',
     'Ekhm.. no 🤡',
     '👎',
-    'Haha, not this one 🤭'
+    'Haha, not this one 🤭',
+    'Uhmmmm.... you are wrong',
+    'You can do better'
 ]
 
 export const goodAnswers = [
     'Yas!',
     'Yes 😄',
-    'Corect!',
+    'Correct!',
     'You\'re a star 🤩',
     'Exactly!',
     'Great 🥳',
