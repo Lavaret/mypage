@@ -8,3 +8,8 @@ export const compass = [
     'b9425afde1f5e5eb96e85d5c8de35a813299cff343efba751cc9dfa349d486c5', //eng short
     '615d2f8ffe1c1923288f66f6a1c65f584d0a112bfc33d371c6ff374830664bac', //pl short
 ];
+
+export const stamp = [
+    '4f4a3854dd3e16e664eec1345ce4844ce6d7d54b558c70f00fcd02abbff7b43c', //no question mark
+    'fe07185bb5b34f497a7a447e104790d3b9cf3dd178332ba5cc5195b78382da0a', //with qm
+];

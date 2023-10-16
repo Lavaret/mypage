@@ -1,32 +1,38 @@
 <template>
 
-  <InfoCaption class="w-5/6 m-auto max-w-5xl">
-    <p class="text-xs">Photo by
-      <a class="info-link " href="https://unsplash.com/@thissillygirlskitchen?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Dana DeVolk</a>
-      on
-      <a class="info-link" href="https://unsplash.com/photos/JBqC2n_0zHM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-    </p>
-  </InfoCaption>
-  <div class="bg-cover bg-center block m-auto shadow rounded relative m-6 w-5/6 h-5/6 max-w-5xl"
-       :style="{'background-image':'url(/img/table.png)'}">
-
-
-
-    <div class="p-20 w-full flex justify-center">
-      <div class="question z-10 transition ease-in-out delay-150 hover:scale-125 duration-500 bg-gray-900 p-2 absolute rounded shadow text-lg m-auto">
-        Where can you be if the compass doesn't work?
-      </div>
-    </div>
-
-    <img width="250" class="compass absolute" :src="compassImage">
-    <img width="26" class="compass-arrow absolute" :src="compassArrowImage">
-
-    <div class="p-2 w-full z-10 absolute answer-input">
-      <answer-input :isValid="isValid" :note="note" @providedAnswer="checkAnswer"></answer-input>
-    </div>
-
-
+  <div v-if="!loaded">
+    <LoaderComponent></LoaderComponent>
   </div>
+
+    <InfoCaption :class="{'invisible': !loaded}" class="w-5/6 m-auto max-w-5xl">
+      <p class="text-xs">Photo by
+        <a class="info-link " href="https://unsplash.com/@thissillygirlskitchen?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Dana DeVolk</a>
+        on
+        <a class="info-link" href="https://unsplash.com/photos/JBqC2n_0zHM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+      </p>
+    </InfoCaption>
+    <div class="bg-cover bg-center block m-auto shadow rounded relative m-6 w-5/6 h-5/6 max-w-5xl"
+         :class="{'invisible': !loaded}"
+         :style="{'background-image':'url(/img/table.png)'}">
+
+
+
+      <div class="p-20 w-full flex justify-center">
+        <div class="question z-10 transition ease-in-out delay-150 hover:scale-125 duration-500 bg-gray-900 p-2 absolute rounded shadow text-lg m-auto">
+          Where can you be if the compass doesn't work?
+        </div>
+      </div>
+
+      <img width="250" class="compass absolute" :src="compassImage">
+      <img width="26" class="compass-arrow absolute" :src="compassArrowImage">
+
+      <div class="p-2 w-full z-10 absolute answer-input">
+        <answer-input :isValid="isValid" :note="note" @providedAnswer="checkAnswer"></answer-input>
+      </div>
+
+
+    </div>
+
 
 </template>
 
@@ -39,11 +45,13 @@ import compassArrowImage from '/public/img/compass-arrow.png';
 import { compass } from "@/composables/answers";
 import { ref, defineEmits } from 'vue';
 import { validateAnswer } from "@/composables/validateAnswer";
+import LoaderComponent from "@/components/LoaderComponent";
 
 let note = ref("Type your answer here:");
 let previousAnswer = ref('');
 const emit = defineEmits(['correctAnswer'])
 let isValid = ref(null);
+let loaded = ref(false);
 
 
 function checkAnswer(answer) {
@@ -57,6 +65,10 @@ function checkAnswer(answer) {
     emit('correctAnswer', 'Post Office');
   }
 }
+
+setTimeout(() => {
+  loaded.value = true;
+}, 300);
 
 
 </script>

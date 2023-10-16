@@ -22,7 +22,7 @@
     </div>
     <div class=" p-2 flex justify-end">
       <div class="address">
-        <p>Miss Lucy Specimen</p>
+        <p>Miss Chloe Rose</p>
         <p>15 Cromwell Road</p>
         <p>London, SW7 5BD</p>
         <p>England</p>
@@ -40,15 +40,25 @@
 import InfoCaption from "@/components/InfoCaption";
 import AnswerInput from "@/components/AnswerInput";
 import stampImage from '/public/img/Stamp.png';
-import {ref} from "vue";
+import {ref, defineEmits} from "vue";
+import {validateAnswer} from "@/composables/validateAnswer";
+import {stamp} from "@/composables/answers";
 
 let note = ref("Type your answer here:");
-// let previousAnswer = ref('');
-// const emit = defineEmits(['correctAnswer'])
+let previousAnswer = ref('');
+const emit = defineEmits(['correctAnswer'])
 let isValid = ref(null);
 
 function checkAnswer(answer) {
- console.log(answer);
+  let validated = validateAnswer(answer, stamp, previousAnswer.value, isValid.value, note.value);
+
+  previousAnswer.value = validated.previousAnswer;
+  isValid.value = validated.isValid;
+  note.value = validated.note;
+
+  if(validated.isValid) {
+    emit('correctAnswer', 'Faraon');
+  }
 }
 </script>
 

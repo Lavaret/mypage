@@ -16,12 +16,14 @@
   </Teleport>
 
   <CompassGame @correctAnswer="openModal" v-if="level === 'North Pole'"/>
-  <StampGame v-if="level === 'Post Office'"></StampGame>
+  <StampGame @correctAnswer="openModal" v-if="level === 'Post Office'"></StampGame>
+  <UnderConstruction v-if="level === 'Faraon'"></UnderConstruction>
 </template>
 
 <script setup>
 import SimpleHeader from "@/components/SimpleHeader";
 import CompassGame from "@/games/CompassGame";
+import UnderConstruction from '@/games/UnderConstruction';
 import { useStorage } from "@/composables/useStorage";
 import ModalComponent from "@/components/ModalComponent";
 import { ref } from 'vue';
@@ -33,7 +35,6 @@ let next = ref('');
 
 function openModal(val) {
   next.value = val;
-  console.log(next.value);
   showModal.value = true;
 }
 
