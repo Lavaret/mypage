@@ -2,7 +2,7 @@
 node_modules
 /dist
 dist.zip
-
+public/img/*
 
 # local env files
 .env.local
