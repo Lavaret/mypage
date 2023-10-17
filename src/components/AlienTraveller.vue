@@ -6,7 +6,11 @@
 
 <script setup>
 setTimeout(() => {
-  document.querySelector('.traveller').classList.remove('on-trip', 'invisible');
+  let traveller = document.querySelector('.traveller');
+
+  if(traveller) {
+    traveller.classList.remove('on-trip', 'invisible');
+  }
 }, 8000);
 </script>
 
