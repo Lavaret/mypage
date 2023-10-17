@@ -5,6 +5,7 @@ import GameView from "@/views/GameView";
 import NotFound from "@/views/NotFound";
 import HashView from "@/views/HashView";
 import BoardView from "@/views/BoardView";
+import SolarSystem from "@/boards/SolarSystem";
 
 const routes = [
     { path: '/', name: 'HomeView', component: HomeView},
@@ -13,6 +14,7 @@ const routes = [
     { path: '/board', name: 'BoardView', component: BoardView },
     { path: '/404', component: NotFound },
     //{ path: '*', redirect: '/404' }
+    { path: '/board/solar-system', name: 'SolarSystem', component: SolarSystem}
 ]
 
 const router = createRouter({
