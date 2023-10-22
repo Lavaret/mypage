@@ -1,5 +1,5 @@
 <template>
-<div class="w-full h-full bg-gray-950 universe flex justify-center items-center">
+<div class="truncate w-full h-full bg-gray-950 universe flex justify-center items-center">
 
   <div class="orbit first">
     <div class="planet neptune"></div>
@@ -42,8 +42,7 @@
 </template>
 
 <script setup>
-let value = 95;
-console.log(value * 2 / 10);
+
 </script>
 
 <style scoped>

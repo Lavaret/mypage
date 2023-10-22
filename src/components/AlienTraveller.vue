@@ -11,7 +11,7 @@ setTimeout(() => {
   if(traveller) {
     traveller.classList.remove('on-trip', 'invisible');
   }
-}, 8000);
+}, 3000);
 </script>
 
 <style scoped>
@@ -27,6 +27,6 @@ setTimeout(() => {
 }
 
 .on-trip {
-  transform: translate3d(1500px, 500px, 10px);
+  transform: translate3d(110vw, 40vh, 10px);
 }
 </style>
