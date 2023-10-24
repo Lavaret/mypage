@@ -31,7 +31,7 @@
   </div>
 
   <div class="answer mt-6 w-3/5 m-auto">
-    <answer-input :isValid="isValid" :note="note" @providedAnswer="checkAnswer"></answer-input>
+    <answer-input :answers="stamp" @correctAnswer="$emit('nextLevel', 'Faraon')"></answer-input>
   </div>
 </div>
 </template>
@@ -40,26 +40,8 @@
 import InfoCaption from "@/components/InfoCaption";
 import AnswerInput from "@/components/AnswerInput";
 import stampImage from '/public/img/Stamp.png';
-import {ref, defineEmits} from "vue";
-import {validateAnswer} from "@/composables/validateAnswer";
 import {stamp} from "@/composables/answers";
 
-let note = ref("Type your answer here:");
-let previousAnswer = ref('');
-const emit = defineEmits(['correctAnswer'])
-let isValid = ref(null);
-
-function checkAnswer(answer) {
-  let validated = validateAnswer(answer, stamp, previousAnswer.value, isValid.value, note.value);
-
-  previousAnswer.value = validated.previousAnswer;
-  isValid.value = validated.isValid;
-  note.value = validated.note;
-
-  if(validated.isValid) {
-    emit('correctAnswer', 'Faraon');
-  }
-}
 </script>
 
 <style scoped>

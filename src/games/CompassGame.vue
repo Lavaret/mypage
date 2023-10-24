@@ -27,7 +27,7 @@
       <img width="26" class="compass-arrow absolute" :src="compassArrowImage">
 
       <div class="p-2 w-full z-10 absolute answer-input">
-        <answer-input :isValid="isValid" :note="note" @providedAnswer="checkAnswer"></answer-input>
+        <answer-input :answers="compass" @correctAnswer="goToNextLevel()"></answer-input>
       </div>
 
 
@@ -44,26 +44,14 @@ import compassImage from "/public/img/compass.png";
 import compassArrowImage from '/public/img/compass-arrow.png';
 import { compass } from "@/composables/answers";
 import { ref, defineEmits } from 'vue';
-import { validateAnswer } from "@/composables/validateAnswer";
 import LoaderComponent from "@/components/LoaderComponent";
 
-let note = ref("Type your answer here:");
-let previousAnswer = ref('');
-const emit = defineEmits(['correctAnswer'])
-let isValid = ref(null);
+const emit = defineEmits(['nextLevel']);
+
 let loaded = ref(false);
 
-
-function checkAnswer(answer) {
-  let validated = validateAnswer(answer, compass, previousAnswer.value, isValid.value, note.value);
-
-  previousAnswer.value = validated.previousAnswer;
-  isValid.value = validated.isValid;
-  note.value = validated.note;
-
-  if(validated.isValid) {
-    emit('correctAnswer', 'Post Office');
-  }
+function goToNextLevel() {
+  emit('nextLevel', 'Post Office');
 }
 
 setTimeout(() => {

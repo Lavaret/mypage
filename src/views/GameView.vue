@@ -15,8 +15,8 @@
     </modal-component>
   </Teleport>
 
-  <CompassGame @correctAnswer="openModal" v-if="level === 'North Pole'"/>
-  <StampGame @correctAnswer="openModal" v-if="level === 'Post Office'"></StampGame>
+  <CompassGame @nextLevel="openModal" v-if="level === 'North Pole'"/>
+  <StampGame @nextLevel="openModal" v-if="level === 'Post Office'"></StampGame>
   <UnderConstruction v-if="level === 'Faraon'"></UnderConstruction>
 </template>
 
