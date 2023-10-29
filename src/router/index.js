@@ -13,7 +13,6 @@ const routes = [
     { path: '/hash', name: 'HashView', component: HashView },
     { path: '/board', name: 'BoardView', component: BoardView },
     { path: '/404', component: NotFound },
-    //{ path: '*', redirect: '/404' }
     { path: '/board/solar-system', name: 'SolarSystem', component: SolarSystem}
 ]
 
