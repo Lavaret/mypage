@@ -15,3 +15,8 @@ export const stamp = [
     '69e8713b2d833a1df2de72eb88dcfbf510f67ce7363576e24900a33f6d7bbcde', //opt2
     '0e71cbf9f0b49cc1f9fc38cb0a04199a61b1dda887e80da27933ea46e7523456', //opt2.
 ];
+
+export const faraon = [
+    '24096bf6fec43f8ffe44187a0c578a48f8ad4ba5c1cd42e7b1d7754ba1647f3e',
+    '184f6ec294793de0c1caab48d6b30b8f680f457f2cc95536733d472ac64fbbc0',
+]

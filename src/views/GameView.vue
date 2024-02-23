@@ -17,7 +17,8 @@
 
   <CompassGame @nextLevel="openModal" v-if="level === 'North Pole'"/>
   <StampGame @nextLevel="openModal" v-if="level === 'Post Office'"></StampGame>
-  <UnderConstruction v-if="level === 'Faraon'"></UnderConstruction>
+  <FaraonGame @nextLevel="openModal" v-if="level === 'Faraon'"></FaraonGame>
+  <UnderConstruction v-if="level === 'Octopus'"></UnderConstruction>
 </template>
 
 <script setup>
@@ -28,6 +29,7 @@ import { useStorage } from "@/composables/useStorage";
 import ModalComponent from "@/components/ModalComponent";
 import { ref } from 'vue';
 import StampGame from "@/games/StampGame";
+import FaraonGame from "@/games/FaraonGame";
 
 let level = useStorage('level', 'North Pole');
 let showModal = ref(false);
