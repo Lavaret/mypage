@@ -1,23 +1,31 @@
 <template>
   <SimpleHeader />
   <div class="h-full w-full flex gap-3 p-3">
-      <router-link to="board/solar-system" class="text-3xl p-4 transition duration-300 ease-out hover:bg-gray-900 shadow rounded bg-gray-950 h-32 flex items-center">
-        <p>Solar System</p>
-      </router-link>
-
-      <a href="https://hopeful-lovelace-0427e2.netlify.app/" class="text-3xl p-4 transition duration-300 ease-out hover:bg-amber-800 shadow rounded bg-amber-900 h-32 flex items-center">
-        <p>Spacer</p>
-      </a>
-
-    <a href="https://gallant-albattani-4a9ed5.netlify.app/" class="text-3xl p-4 transition duration-300 ease-out hover:bg-blue-500 shadow rounded bg-blue-600 h-32 flex items-center">
-      <p>Tic tac toe</p>
-    </a>
+    <BoardLink
+        :internal="true"
+        link="board/solar-system"
+        class="hover:bg-gray-900 bg-gray-800 border-gray-900 hover:border-gray-950"
+    >
+      Solar System
+    </BoardLink>
+    <BoardLink
+        link="https://hopeful-lovelace-0427e2.netlify.app/"
+        class="hover:bg-amber-600 bg-amber-500 border-amber-600 hover:border-amber-700"
+    >
+      Spacer
+    </BoardLink>
+    <BoardLink
+        link="https://gallant-albattani-4a9ed5.netlify.app/"
+        class="hover:bg-blue-600 bg-blue-500 border-blue-600 hover:border-blue-700"
+    >
+      Tic tac toe
+    </BoardLink>
   </div>
 </template>
 
 <script setup>
 import SimpleHeader from "@/components/SimpleHeader";
-
+import BoardLink from "@/components/BoardLink"
 </script>
 
 <style scoped>
