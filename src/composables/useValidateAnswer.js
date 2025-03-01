@@ -1,21 +1,11 @@
 import sha256 from "crypto-js/sha256";
-import { ref } from 'vue';
+import { computed } from "vue";
 
 export function useValidateAnswer(answer, acceptableAnswers) {
-    let isValid = ref(false);
+    const isValid = computed(() => {
+        if (!answer.value) return null;
+        return acceptableAnswers.includes(sha256(answer.value.toLowerCase().replace(/\s/g, "")).toString());
+    });
 
-    function generateHash(value) {
-        return sha256(value.toLowerCase().replace(/\s/g, "")).toString();
-    }
-
-    return () => {
-        if(!answer.value) {
-            isValid.value = null;
-        }
-        else {
-            isValid.value = acceptableAnswers.find((e) => e === generateHash(answer.value)) !== undefined;
-        }
-
-        return isValid;
-    };
+    return { isValid };
 }

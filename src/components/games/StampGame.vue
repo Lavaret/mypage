@@ -40,7 +40,7 @@
 import InfoCaption from "@/components/InfoCaption";
 import AnswerInput from "@/components/AnswerInput";
 import stampImage from '/public/img/Stamp.png';
-import {stamp} from "@/composables/answers";
+import { stamp } from "@/composables/answers";
 
 </script>
 

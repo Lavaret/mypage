@@ -1,5 +1,4 @@
 <template>
-  <SimpleHeader />
   <Teleport to="#app">
     <modal-component :show="showModal" >
       <template #header>
@@ -17,19 +16,18 @@
 
   <CompassGame @nextLevel="openModal" v-if="level === 'North Pole'"/>
   <StampGame @nextLevel="openModal" v-if="level === 'Post Office'"></StampGame>
-  <FaraonGame @nextLevel="openModal" v-if="level === 'Faraon'"></FaraonGame>
-  <UnderConstruction v-if="level === 'Octopus'"></UnderConstruction>
+<!--  <FaraonGame @nextLevel="openModal" v-if="level === 'Faraon'"></FaraonGame>-->
+<!--  <UnderConstruction v-if="level === 'Octopus'"></UnderConstruction>-->
 </template>
 
 <script setup>
-import SimpleHeader from "@/components/SimpleHeader";
-import CompassGame from "@/games/CompassGame";
-import UnderConstruction from '@/games/UnderConstruction';
+import CompassGame from "@/components/games/CompassGame";
+// import UnderConstruction from '@/components/games/UnderConstruction';
 import { useStorage } from "@/composables/useStorage";
 import ModalComponent from "@/components/ModalComponent";
 import { ref } from 'vue';
-import StampGame from "@/games/StampGame";
-import FaraonGame from "@/games/FaraonGame";
+import StampGame from "@/components/games/StampGame";
+// import FaraonGame from "@/components/games/FaraonGame";
 
 let level = useStorage('level', 'North Pole');
 let showModal = ref(false);

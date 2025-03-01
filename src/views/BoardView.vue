@@ -1,5 +1,4 @@
 <template>
-  <SimpleHeader />
   <div class="h-full w-full flex gap-3 p-3">
     <BoardLink
         :internal="true"
@@ -20,11 +19,16 @@
     >
       Tic tac toe
     </BoardLink>
+    <BoardLink
+        link="/finance"
+        class="hover:bg-green-600 bg-green-500 border-green-600 hover:border-green-700"
+    >
+      Finance
+    </BoardLink>
   </div>
 </template>
 
 <script setup>
-import SimpleHeader from "@/components/SimpleHeader";
 import BoardLink from "@/components/BoardLink"
 </script>
 

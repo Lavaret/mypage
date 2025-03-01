@@ -1,10 +1,14 @@
 <template>
-  <router-view></router-view>
-  <FooterComponent></FooterComponent>
+  <div class="flex flex-col justify-between">
+    <SimpleHeader/>
+    <router-view></router-view>
+    <FooterComponent></FooterComponent>
+  </div>
 </template>
 
 <script setup>
 import FooterComponent from '@/components/FooterComponent';
+import SimpleHeader from "@/components/SimpleHeader";
 </script>
 
 <style>
@@ -19,7 +23,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: antiquewhite;
-  height: 100vh;
 }
 
 a {

@@ -6,38 +6,35 @@
 </template>
 
 <script setup>
-import { defineProps, ref, defineEmits, computed } from 'vue';
+import { defineProps, ref, defineEmits } from 'vue';
 import { useValidateAnswer } from "@/composables/useValidateAnswer";
 import {getRandomGood, getRandomWrong} from "@/composables/reactions";
 
-let answer = ref('');
-const check = useValidateAnswer(answer, props.answers);
-let defaultNote = "Type your answer here: ";
-let note = ref(defaultNote);
-let isValid = ref(null);
+const props = defineProps({
+  answers: Array,
+})
 
-const noteColor = computed(() => ({
-  'text-green-500' : isValid.value === true,
-  'text-red-500' : isValid.value === false
-}))
+let answer = ref('');
+const { isValid } = useValidateAnswer(answer, props.answers);
+let defaultNote = "Type your answer here: ";
+const note = ref(defaultNote);
+const noteColor = ref('')
+
 const emit = defineEmits(['correctAnswer']);
 
 function checkAnswer() {
-  let validation = check();
-  isValid.value = validation.value;
   if(isValid.value === false) {
     note.value = getRandomWrong();
+    noteColor.value = 'text-red-500';
   } else if(isValid.value === true) {
     note.value = getRandomGood();
+    noteColor.value = 'text-green-500';
     emit('correctAnswer');
   } else {
     note.value = defaultNote;
+    noteColor.value = '';
   }
 }
-
- const props = defineProps({
-   answers: Array,
- })
 
 </script>
 

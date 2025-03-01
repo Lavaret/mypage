@@ -1,5 +1,5 @@
 <template>
-<div class="truncate w-full h-full bg-gray-950 universe flex justify-center items-center">
+<div class="truncate w-full h-full bg-gray-950 universe flex justify-center items-center absolute">
 
   <div class="orbit first">
     <div class="planet neptune"></div>
