@@ -1,7 +1,10 @@
 <template>
   <div class="bg-gray-900 rounded shadow p-2">
     <p :class="noteColor" class="text-left w-full mb-2">{{note}}</p>
-    <input @keydown.enter="checkAnswer()" v-model="answer" class="bg-gray-800 h-8 w-full p-2 rounded shadow">
+    <div class="flex gap-2 items-center">
+      <input @keydown.enter="checkAnswer()" v-model="answer" class="bg-gray-800 h-8 w-full p-2 rounded shadow">
+      <button-component :disabled="!note" :size="'small'" type="secondary" @click="checkAnswer">Check!</button-component>
+    </div>
   </div>
 </template>
 
@@ -9,6 +12,7 @@
 import { defineProps, ref, defineEmits } from 'vue';
 import { useValidateAnswer } from "@/composables/useValidateAnswer";
 import {getRandomGood, getRandomWrong} from "@/composables/reactions";
+import ButtonComponent from "@/components/ButtonComponent";
 
 const props = defineProps({
   answers: Array,
