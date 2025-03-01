@@ -1,5 +1,8 @@
 <template>
-<p>This level is under construction, sorry 😟</p>
+  <h2>
+    <slot />
+  </h2>
+  <p>This level is under construction, sorry 😟</p>
 </template>
 
 <script setup>

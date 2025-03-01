@@ -11,7 +11,7 @@
         <a class="info-link" href="https://unsplash.com/photos/JBqC2n_0zHM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
       </p>
     </InfoCaption>
-    <div class="bg-cover bg-center block m-auto shadow rounded relative m-6 w-5/6 h-5/6 max-w-5xl"
+    <div class="bg-cover bg-center table-background block m-auto shadow rounded relative m-6 w-5/6 max-w-5xl"
          :class="{'invisible': !loaded}"
          :style="{'background-image':'url(/img/table.png)'}">
 
@@ -78,6 +78,10 @@ setTimeout(() => {
 
 .question {
   max-width: 73%;
+}
+
+.table-background {
+  height: 550px;
 }
 
 .compass-arrow {

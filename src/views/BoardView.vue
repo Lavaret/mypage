@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-full flex gap-3 p-3">
+  <div class="h-full w-full flex gap-3 p-3 flex-wrap">
     <BoardLink
         :internal="true"
         link="board/solar-system"
@@ -20,10 +20,18 @@
       Tic tac toe
     </BoardLink>
     <BoardLink
+        :internal="true"
         link="/finance"
         class="hover:bg-green-600 bg-green-500 border-green-600 hover:border-green-700"
     >
       Finance
+    </BoardLink>
+    <BoardLink
+        :internal="true"
+        link="/game"
+        class="hover:bg-pink-600 bg-pink-500 border-pink-600 hover:border-pink-700"
+    >
+      Game
     </BoardLink>
   </div>
 </template>
