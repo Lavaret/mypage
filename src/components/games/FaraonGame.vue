@@ -1,18 +1,19 @@
 <template>
-  <div class="p-20 w-full flex flex-col justify-center">
-    <div class="transition ease-in-out delay-150 hover:scale-125 duration-500 bg-gray-900 p-2 rounded shadow text-lg m-auto">
-      Whose name is it?
-    </div>
+  <game-component>
+    <template #question>
+      This is the name of one of the best Pharaohs. Can you translate it?
+    </template>
 
-    <div class="name-box w-1/2">
-      <span title="Maatkara">𓇳𓁦𓂓</span>
-    </div>
+    <template #game-content>
+      <div class="name-box w-[18rem]">
+        <span title="Maatkara">𓇳𓁦𓂓</span>
+      </div>
+    </template>
 
-    <div class="p-2 w-full">
+    <template #answers>
       <answer-input :answers="faraon" @correctAnswer="goToNextLevel()"></answer-input>
-    </div>
-  </div>
-
+    </template>
+  </game-component>
 
 </template>
 
@@ -20,6 +21,7 @@
 import {faraon} from "@/composables/answers";
 import {defineEmits} from "vue";
 import AnswerInput from "@/components/AnswerInput";
+import GameComponent from "@/components/games/GameComponent";
 
 const emit = defineEmits(['nextLevel']);
 
@@ -51,8 +53,8 @@ function goToNextLevel() {
   content: '';
   position: absolute;
   width: 1px;
-  height: 147px;
+  height: 9rem;
   border: 1px solid darkgray;
-  transform: translate(97px);
+  transform: translate(44px);
 }
 </style>

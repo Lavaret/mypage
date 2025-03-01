@@ -1,39 +1,38 @@
 <template>
-<div class="w-full">
+  <game-component>
+    <template #question>
+      A secret message is hidden on this envelope. Can you read it?
+    </template>
+    <template #game-content>
 
-  <div class="mb-5 w-full flex justify-center">
-    <div class="m-1 question z-10 transition ease-in-out delay-150 hover:scale-125 duration-500 bg-gray-900 p-2 rounded shadow text-lg m-auto">
-      A secret message is hidden on this letter. Can you read it?
-    </div>
-  </div>
+      <InfoCaption class="caption m-auto max-w-5xl">
+        <p class="text-xs">Stamp from photo by
+          <a class="info-link " href="https://unsplash.com/@anniespratt?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Annie Spratt</a>
+          on
+          <a class="info-link" href="https://unsplash.com/photos/4Ujhq5_fJik?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+        </p>
+      </InfoCaption>
 
-  <InfoCaption class="caption w-3/4 m-auto max-w-5xl">
-    <p class="text-xs">Stamp from photo by
-      <a class="info-link " href="https://unsplash.com/@anniespratt?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Annie Spratt</a>
-      on
-      <a class="info-link" href="https://unsplash.com/photos/4Ujhq5_fJik?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-    </p>
-
-  </InfoCaption>
-
-  <div class="envelope m-auto bg-stone-200 w-3/4">
-    <div class="stamp p-6 flex justify-end">
-      <img width="70" class="rotate-[8deg]" :src="stampImage" />
-    </div>
-    <div class=" p-2 flex justify-end">
-      <div class="address">
-        <p>Miss Chloe Rose</p>
-        <p>13 Cromwell Road</p>
-        <p>London, SW3 5SD</p>
-        <p>England</p>
+      <div class="envelope m-auto bg-stone-200">
+        <div class="stamp p-6 flex justify-end">
+          <img width="70" class="rotate-[8deg]" :src="stampImage" />
+        </div>
+        <div class=" p-2 flex justify-end">
+          <div class="address">
+            <p>Miss Chloe Rose</p>
+            <p>13 Cromwell Road</p>
+            <p>London, SW3 5SD</p>
+            <p>England</p>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
 
-  <div class="answer mt-6 w-3/5 m-auto">
-    <answer-input :answers="stamp" @correctAnswer="$emit('nextLevel', 'Faraon')"></answer-input>
-  </div>
-</div>
+    </template>
+
+    <template #answers>
+      <answer-input :answers="stamp" @correctAnswer="$emit('nextLevel', 'Faraon')"></answer-input>
+    </template>
+  </game-component>
 </template>
 
 <script setup>
@@ -41,6 +40,7 @@ import InfoCaption from "@/components/InfoCaption";
 import AnswerInput from "@/components/AnswerInput";
 import stampImage from '/public/img/Stamp.png';
 import { stamp } from "@/composables/answers";
+import GameComponent from "@/components/games/GameComponent";
 
 </script>
 
@@ -65,7 +65,4 @@ import { stamp } from "@/composables/answers";
   font-family: 'Herr Von Muellerhoff', cursive;
 }
 
-.answer {
-  min-width: 200px;
-}
 </style>

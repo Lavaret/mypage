@@ -1,38 +1,29 @@
 <template>
+  <game-component>
+    <template #question>
+      Where can you be if the compass doesn't work?
+    </template>
+    <template #game-content>
+      <InfoCaption class="mx-3">
+        <p class="text-xs">Photo by
+          <a class="info-link " href="https://unsplash.com/@thissillygirlskitchen?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Dana DeVolk</a>
+          on
+          <a class="info-link" href="https://unsplash.com/photos/JBqC2n_0zHM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
+        </p>
+      </InfoCaption>
 
-  <div v-if="!loaded">
-    <LoaderComponent></LoaderComponent>
-  </div>
+      <div class="bg-cover bg-center table-background block m-auto shadow rounded relative mx-3"
+           :style="{'background-image':'url(/img/table.png)'}">
 
-    <InfoCaption :class="{'invisible': !loaded}" class="w-5/6 m-auto max-w-5xl">
-      <p class="text-xs">Photo by
-        <a class="info-link " href="https://unsplash.com/@thissillygirlskitchen?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Dana DeVolk</a>
-        on
-        <a class="info-link" href="https://unsplash.com/photos/JBqC2n_0zHM?utm_content=creditCopyText&utm_medium=referral&utm_source=unsplash">Unsplash</a>
-      </p>
-    </InfoCaption>
-    <div class="bg-cover bg-center table-background block m-auto shadow rounded relative m-6 w-5/6 max-w-5xl"
-         :class="{'invisible': !loaded}"
-         :style="{'background-image':'url(/img/table.png)'}">
+        <img width="250" alt="compass-image" class="compass absolute" :src="compassImage">
+        <img width="26" alt="compass-arrow" class="compass-arrow absolute" :src="compassArrowImage">
 
-
-
-      <div class="p-20 w-full flex justify-center">
-        <div class="question z-10 transition ease-in-out delay-150 hover:scale-125 duration-500 bg-gray-900 p-2 absolute rounded shadow text-lg m-auto">
-          Where can you be if the compass doesn't work?
-        </div>
       </div>
-
-      <img width="250" class="compass absolute" :src="compassImage">
-      <img width="26" class="compass-arrow absolute" :src="compassArrowImage">
-
-      <div class="p-2 w-full z-10 absolute answer-input">
-        <answer-input :answers="compass" @correctAnswer="goToNextLevel()"></answer-input>
-      </div>
-
-
-    </div>
-
+    </template>
+    <template #answers>
+      <answer-input :answers="compass" @correctAnswer="goToNextLevel()"></answer-input>
+    </template>
+  </game-component>
 
 </template>
 
@@ -43,20 +34,14 @@ import AnswerInput from "@/components/AnswerInput";
 import compassImage from "/public/img/compass.png";
 import compassArrowImage from '/public/img/compass-arrow.png';
 import { compass } from "@/composables/answers";
-import { ref, defineEmits } from 'vue';
-import LoaderComponent from "@/components/LoaderComponent";
+import { defineEmits } from 'vue';
+import GameComponent from "@/components/games/GameComponent";
 
 const emit = defineEmits(['nextLevel']);
-
-let loaded = ref(false);
 
 function goToNextLevel() {
   emit('nextLevel', 'Post Office');
 }
-
-setTimeout(() => {
-  loaded.value = true;
-}, 300);
 
 
 </script>
@@ -67,25 +52,17 @@ setTimeout(() => {
   @apply hover:underline underline-offset-2;
 }
 
-.answer-input {
-  top: 70vh;
-}
-
 .compass {
-  top: calc(33vh - 53px);
+  top: calc(12vh - 53px);
   left: calc(50% - 125px);
 }
 
-.question {
-  max-width: 73%;
-}
-
 .table-background {
-  height: 550px;
+  min-height: 400px;
 }
 
 .compass-arrow {
-  top: calc(33vh - 71px + 125px);
+  top: calc(12vh - 71px + 125px);
   left: calc(50% - 13px);
   animation: compass-spin 5s ease-in infinite;
 }
@@ -127,9 +104,6 @@ setTimeout(() => {
 }
 
 @media screen and (max-height: 680px) {
-  .answer-input {
-    top: 400px;
-  }
 
   div.bg-cover {
     min-height: 500px;

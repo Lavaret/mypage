@@ -14,7 +14,7 @@
     </modal-component>
   </Teleport>
 
-  <div class="flex flex-col gap-[5rem]">
+  <div class="flex flex-col gap-[3rem] p-2">
     <div class="min-h-[500px]">
       <CompassGame @nextLevel="openModal" v-if="level === 'North Pole'"/>
       <StampGame @nextLevel="openModal" v-if="level === 'Post Office'"></StampGame>
@@ -24,19 +24,23 @@
       <UnderConstruction v-if="level === 'Sea King'">There will be sea king game! 🗺️</UnderConstruction>
     </div>
 
-    <div class="flex justify-between mx-auto w-2/3">
-      <ButtonComponent @click="previousGame" v-if="level !== 'North Pole'">
-        <div class="flex gap-3 justify-center items-center">
-          <ArrowLeftIcon class="size-4"/>
-          <span>Previous</span>
-        </div>
-      </ButtonComponent>
-      <ButtonComponent @click="nextGame" v-if="level !== 'Sea King'">
-        <div class="flex gap-3 justify-center items-center">
-          <span>Next</span>
-          <ArrowRightIcon class="size-4"/>
-        </div>
-      </ButtonComponent>
+    <div class="flex mx-auto w-full md:w-2/3 justify-between">
+      <div>
+        <ButtonComponent @click="previousGame" v-if="level !== 'North Pole'">
+          <div class="flex gap-3 justify-center items-center">
+            <ArrowLeftIcon class="size-4"/>
+            <span>Previous</span>
+          </div>
+        </ButtonComponent>
+      </div>
+      <div>
+        <ButtonComponent @click="nextGame" v-if="level !== 'Sea King'">
+          <div class="flex gap-3 justify-center items-center">
+            <span>Next</span>
+            <ArrowRightIcon class="size-4"/>
+          </div>
+        </ButtonComponent>
+      </div>
     </div>
   </div>
 
