@@ -1,5 +1,5 @@
 <template>
-  <game-component>
+  <game-component :loaded="loaded">
     <template #question>
       Where can you be if the compass doesn't work?
     </template>
@@ -15,8 +15,8 @@
       <div class="bg-cover bg-center table-background block m-auto shadow rounded relative mx-3"
            :style="{'background-image':'url(/img/table.png)'}">
 
-        <img width="250" alt="compass-image" class="compass absolute" :src="compassImage">
-        <img width="26" alt="compass-arrow" class="compass-arrow absolute" :src="compassArrowImage">
+        <img width="250" alt="compass-image" class="compass absolute" @load="handleLoadImage" :src="compassImage">
+        <img width="26" alt="compass-arrow" class="compass-arrow absolute" @load="handleLoadImage" :src="compassArrowImage">
 
       </div>
     </template>
@@ -34,10 +34,23 @@ import AnswerInput from "@/components/AnswerInput";
 import compassImage from "/public/img/compass.png";
 import compassArrowImage from '/public/img/compass-arrow.png';
 import { compass } from "@/composables/answers";
-import { defineEmits } from 'vue';
+import { defineEmits, ref } from 'vue';
 import GameComponent from "@/components/games/GameComponent";
 
 const emit = defineEmits(['nextLevel']);
+
+const loaded = ref(false)
+
+let imageLoaderCounter = ref(0);
+
+const handleLoadImage = () => {
+  imageLoaderCounter.value++
+  if (imageLoaderCounter.value === 2) {
+    setTimeout(() => {
+      loaded.value = true;
+    }, 500)
+  }
+}
 
 function goToNextLevel() {
   emit('nextLevel', 'Post Office');

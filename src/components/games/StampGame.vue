@@ -1,5 +1,5 @@
 <template>
-  <game-component>
+  <game-component :loaded="loaded">
     <template #question>
       A secret message is hidden on this envelope. Can you read it?
     </template>
@@ -15,7 +15,7 @@
 
       <div class="envelope m-auto bg-stone-200">
         <div class="stamp p-6 flex justify-end">
-          <img width="70" class="rotate-[8deg]" :src="stampImage" />
+          <img width="70" class="rotate-[8deg]" :src="stampImage" @load="loaded = true" />
         </div>
         <div class=" p-2 flex justify-end">
           <div class="address">
@@ -41,6 +41,9 @@ import AnswerInput from "@/components/AnswerInput";
 import stampImage from '/public/img/Stamp.png';
 import { stamp } from "@/composables/answers";
 import GameComponent from "@/components/games/GameComponent";
+import { ref } from 'vue'
+
+const loaded = ref(false)
 
 </script>
 

@@ -8,10 +8,10 @@
     </div>
 
     <div class="game-content border rounded shadow border-gray-900 flex flex-col justify-center">
-      <div v-if="!loaded">
+      <div v-if="!props.loaded">
         <LoaderComponent></LoaderComponent>
       </div>
-      <div v-else>
+      <div>
         <slot name="game-content"/>
       </div>
     </div>
@@ -23,14 +23,15 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { defineProps } from "vue";
 import LoaderComponent from "@/components/LoaderComponent";
 
-let loaded = ref(false);
-
-setTimeout(() => {
-  loaded.value = true;
-}, 500);
+const props = defineProps({
+  loaded: {
+    type: Boolean,
+    default: true
+  }
+})
 
 </script>
 
