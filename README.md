@@ -3,6 +3,7 @@
 ## Description
 My Page is a personal website showing information about me and my projects. It includes various interactive applications.
 
+[See deployed version](https://justynasieja.netlify.app)
 ## Features 
 - **About Me** – A short description of who I am and my interests.
 - **Board with projects** – A section displaying several applications I have created.
