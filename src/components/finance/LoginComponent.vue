@@ -9,7 +9,7 @@
         inventore quaerat mollitia?
       </p>
 
-      <form action="#" class="mt-6 mb-0 space-y-4 rounded-lg p-4 shadow-lg sm:p-6 lg:p-8">
+      <form class="mt-6 mb-0 space-y-4 rounded-lg p-4 shadow-lg border border-green-900 sm:p-6 lg:p-8">
         <p class="text-center text-lg font-medium">Sign in to your account</p>
 
         <div>
@@ -18,7 +18,8 @@
           <div class="relative">
             <input
                 type="email"
-                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-xs"
+                v-model="username"
+                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-xs bg-gray-600"
                 placeholder="Enter email"
             />
 
@@ -47,7 +48,8 @@
           <div class="relative">
             <input
                 type="password"
-                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-xs"
+                v-model="password"
+                class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-xs bg-gray-600"
                 placeholder="Enter password"
             />
 
@@ -76,7 +78,7 @@
           </div>
         </div>
 
-        <button
+        <button @click.prevent="$emit('login', username, password)"
             type="submit"
             class="block w-full rounded-lg bg-green-600 px-5 py-3 text-sm font-medium text-white"
         >
@@ -84,11 +86,16 @@
         </button>
 
       </form>
+
     </div>
   </div>
 </template>
 
 <script setup>
+import { ref } from 'vue'
+
+const username = ref('');
+const password = ref('');
 
 </script>
 

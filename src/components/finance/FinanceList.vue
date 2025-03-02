@@ -6,52 +6,43 @@
       <thead class="ltr:text-left rtl:text-right">
       <tr>
         <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
-          Name
+          ID
         </th>
         <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
-          Date of Birth
+          Description
         </th>
-        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">Role</th>
+        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">Amount</th>
         <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
-          Salary
+          Created At
         </th>
       </tr>
       </thead>
 
       <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
-      <tr>
+      <tr v-for="transaction in transactions.data" :key="transaction.id">
         <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
-          John Doe
+          {{ transaction.id }}
         </td>
-        <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">24/05/1995</td>
-        <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">Web Developer</td>
-        <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">$120,000</td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
+          {{ transaction.description }}
+        </td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
+          {{ transaction.amount }}
+        </td>
+        <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
+          {{ transaction.created_at }}
+        </td>
       </tr>
 
-      <tr class="*:whitespace-nowrap *:px-4 *:py-2">
-        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
-          Jane Doe
-        </td>
-        <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">04/11/1980</td>
-        <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">Web Designer</td>
-        <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">$100,000</td>
-      </tr>
-
-      <tr class="*:whitespace-nowrap *:px-4 *:py-2">
-        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
-          Gary Barlow
-        </td>
-        <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">24/05/1995</td>
-        <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">Singer</td>
-        <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">$20,000</td>
-      </tr>
       </tbody>
     </table>
   </div>
 </template>
 
 <script setup>
+import { transactionStore } from "@/store/transactionStore";
 
+const transactions = transactionStore()
 </script>
 
 <style scoped>

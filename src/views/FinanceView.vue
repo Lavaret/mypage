@@ -1,15 +1,16 @@
 <template>
-  <div class="flex flex-col justify-center items-center h-full">
+  <div class="flex flex-col justify-center items-center h-full p-3">
 
-    <LoginComponent v-if="!loggedIn"/>
+    <LoginComponent v-if="!user.loggedIn" @login="(username, password) => handleLogin(username, password)"/>
 
-    <div v-if="loggedIn" class="flex flex-col gap-4 w-1/2 text-left m-auto">
-      <StatCard :current-amount="1000" :previous-amount="800"/>
+    <div v-if="user.loggedIn" class="flex flex-col gap-4 md:w-2/3 w-full text-left m-auto">
+      <StatCard :current-amount="totalAmount" :previous-amount="1"/>
       <FinanceList />
+
+      <br/>
+      <button @click="logout">logout</button>
     </div>
-
   </div>
-
 
 </template>
 <script setup>
@@ -17,14 +18,63 @@
 import FinanceList from "@/components/finance/FinanceList";
 import StatCard from "@/components/finance/StatCard";
 import LoginComponent from "@/components/finance/LoginComponent";
-// import { createClient } from 'jsr:@supabase/supabase-js@2'
+import { useDatabase } from "@/composables/useDatabase";
+import { userStore } from '@/store/userStore'
+import { transactionStore } from "@/store/transactionStore";
+import { onMounted, computed } from "vue";
+
+const user = userStore()
+const transactions = transactionStore()
+
+const totalAmount = computed(() => {
+  let amount = 0;
+  transactions.data.forEach((transaction) => {
+    amount += transaction.amount
+  })
+
+  return Number(amount.toFixed(2))
+})
+
+const { login, getTransactions } = useDatabase();
+
+const logout = () => {
+  user.loggedIn = false
+}
+
+const handleLogin = async (username, password) => {
+
+  const data = await login(username, password)
+
+  if (data) {
+    user.$patch({
+      data: data.user,
+      loggedIn: true,
+      access_token: data.session.access_token,
+      expires_in: data.session.expires_in,
+      expires_at: data.session.expires_at,
+    })
+
+    showTransactions()
+  }
+}
+
+const showTransactions = async () => {
+  const data = await getTransactions(user.data.id)
+
+  if (data) {
+    transactions.$patch({
+      data: data,
+    })
+  }
+}
+
+onMounted( () => {
+  if (user.loggedIn && !transactions.data) {
+    showTransactions()
+  }
+})
 
 
-// console.log(supabaseUrl, supabaseKey);
-
-// const supabase = createClient(supabaseUrl, supabaseKey);
-
-const loggedIn = false
 </script>
 <style>
 
