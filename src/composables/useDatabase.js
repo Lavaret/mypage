@@ -10,18 +10,14 @@ export function useDatabase() {
     const error = ref('')
     const loading = ref(false)
 
-    const login = async (email, password) => {
-
+    const supabaseCall = async (callback) => {
         try {
             loading.value = true
-            const { data, error } = await client.auth.signInWithPassword({
-                email: email,
-                password: password
-            });
+            const { data, error } = await callback()
 
             if (error) {
-                console.error('Login error:', error.message);
-                throw new Error(`Login error: ${error.message}`);
+                console.error('Error:', error.message);
+                throw new Error(`Error: ${error.message}`);
             }
 
             return data;
@@ -33,28 +29,40 @@ export function useDatabase() {
         }
     }
 
-    const getTransactions = async (userId) => {
-        try {
-            loading.value = true
+    const login = (email, password) => (
+        supabaseCall(() => (
+            client.auth.signInWithPassword({
+                email: email,
+                password: password
+            })
+        ))
+    )
 
-            const { data, error } = await client
+    const getTransactions = (userId) => (
+        supabaseCall(() => (
+            client
                 .from('Transactions')
                 .select('*')
                 .eq('user_id', userId)
+        ))
+    )
 
-            if (error) {
-                console.error('Database error:', error.message);
-                throw new Error(`Database error: ${error.message}`);
-            }
+    const addTransaction = (payload) => (
+        supabaseCall(() => (
+            client
+                .from('Transactions')
+                .insert([
+                    payload
+                ])
+                .select()
+        ))
+    )
 
-            return data;
-        } catch (err) {
-            error.value = err.message;
-            return null;
-        } finally {
-            loading.value = false;
-        }
-    }
-
-    return { login, getTransactions, error, loading };
+    return {
+        login,
+        getTransactions,
+        addTransaction,
+        error,
+        loading
+    };
 }

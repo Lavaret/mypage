@@ -26,11 +26,23 @@
         <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
           {{ transaction.description }}
         </td>
-        <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
+        <td
+            class="whitespace-nowrap px-4 py-2"
+            :class="{
+              'text-red-600': transaction.amount < 0,
+              'text-green-600': transaction.amount > 0
+            }"
+        >
           {{ transaction.amount }}
         </td>
         <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
-          {{ transaction.created_at }}
+          {{ new Date(transaction.created_at).toLocaleDateString('pl-PL', {
+              month: 'long',
+              day: 'numeric',
+              hour: '2-digit',
+              minute: '2-digit',
+            })
+          }}
         </td>
       </tr>
 

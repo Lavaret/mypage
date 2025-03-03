@@ -9,7 +9,7 @@
   >
     <div v-if="show" class="modal-mask z-20">
       <div class="modal-container rounded-md shadow">
-        <header class="w-full text-left text-lg p-2 bg-gray-800 rounded-t-md shadow">
+        <header class="w-full text-left text-lg p-2 bg-gray-900 rounded-t-md shadow">
           <slot name="header">Header</slot>
         </header>
         <div class="w-full text-left p-2">
@@ -42,7 +42,7 @@ defineProps({
 }
 
 .modal-container {
-  @apply bg-gray-900;
+  @apply bg-gray-800;
   width: 60vw;
   max-width: 500px;
   min-width: 200px;
