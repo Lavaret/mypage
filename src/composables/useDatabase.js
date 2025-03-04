@@ -7,7 +7,7 @@ export function useDatabase() {
 
     console.log('**getting supabase client')
     const client = createClient(supabaseUrl, supabaseAnonKey);
-    const error = ref('')
+    const error = ref('test')
     const loading = ref(false)
 
     const supabaseCall = async (callback) => {

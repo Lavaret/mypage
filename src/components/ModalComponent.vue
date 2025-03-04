@@ -47,4 +47,12 @@ defineProps({
   max-width: 500px;
   min-width: 200px;
 }
+
+input[type="date"]
+{
+  display:block;
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  min-height: 1.2em;
+}
 </style>

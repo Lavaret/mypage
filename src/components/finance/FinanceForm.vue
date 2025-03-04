@@ -19,9 +19,9 @@
               <label class="sr-only" for="date">Date</label>
               <input
                   class="w-full rounded-lg border-gray-200 bg-gray-700 p-3 text-sm"
-                  type="date"
+                  type="datetime-local"
                   id="date"
-                  v-model="formData.date"
+                  v-model="formData.created_at"
               />
             </div>
 
@@ -49,7 +49,7 @@ import { ref, defineExpose } from 'vue'
 const formData = ref({
   amount: 100,
   created_at: new Date(),
-  description: 'Nowa transakcja'
+  description: ''
 })
 
 defineExpose({ formData });

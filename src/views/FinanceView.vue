@@ -18,9 +18,20 @@
       </modal-component>
     </Teleport>
 
+    <Teleport to="#app">
+      <AlertComponent
+          v-show="showAlert"
+          type="error"
+          @close-alert="showAlert = false"
+      >
+        {{ error }}
+      </AlertComponent>
+    </Teleport>
+
     <LoginComponent v-if="!user.loggedIn" @login="(username, password) => handleLogin(username, password)"/>
 
     <div v-if="user.loggedIn" class="flex flex-col gap-4 md:w-2/3 w-full text-left m-auto">
+
       <StatCard :current-amount="totalAmount" :previous-amount="1"/>
       <div>
         <ButtonComponent @click="showModal = true" size="small" class="ml-auto">
@@ -49,11 +60,13 @@ import { onMounted, computed } from "vue";
 import ButtonComponent from "@/components/ButtonComponent";
 import { PlusIcon } from "@heroicons/vue/16/solid";
 import ModalComponent from "@/components/ModalComponent";
-import { ref } from 'vue';
+import { ref, watch } from 'vue';
+import AlertComponent from "@/components/AlertComponent";
 
 const user = userStore()
 const transactions = transactionStore()
 const showModal = ref(false);
+const showAlert = ref(false);
 const formRef = ref(null);
 
 const totalAmount = computed(() => {
@@ -69,6 +82,7 @@ const {
   login,
   getTransactions,
   addTransaction,
+  error,
 } = useDatabase();
 
 const logout = () => {
@@ -103,6 +117,7 @@ const showTransactions = async () => {
 }
 
 const handleFormSubmit = async () => {
+  console.log(formRef.value.formData)
   const data = await addTransaction({
     ...formRef.value.formData,
     user_id: user.data.id
@@ -123,6 +138,17 @@ const handleFormSubmit = async () => {
 onMounted( () => {
   if (user.loggedIn && !transactions.data) {
     showTransactions()
+  }
+})
+
+watch(error, () => {
+  if (error.value) {
+    showAlert.value = true;
+
+    setTimeout(() => {
+      showAlert.value = false;
+      error.value = ''
+    }, 3690)
   }
 })
 
