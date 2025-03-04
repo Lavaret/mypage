@@ -2,7 +2,13 @@
 
   <div class="mx-auto px-4 py-16 sm:px-6 lg:px-8">
     <div class="mx-auto">
-      <h1 class="text-center text-2xl font-bold text-green-600 sm:text-3xl">Welcome to Finance 💸</h1>
+      <div class="flex flex-nowrap gap-2 justify-center items-center">
+        <h1 class="text-center text-2xl font-bold text-green-600 sm:text-3xl">
+          Welcome to Finance
+        </h1>
+        <span class="animate-wiggle text-2xl">💸</span>
+      </div>
+
 
       <p class="mx-auto mt-4 max-w-md text-center text-gray-500">
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati sunt dolores deleniti

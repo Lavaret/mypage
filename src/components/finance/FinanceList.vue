@@ -3,20 +3,9 @@
     <table
         class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm dark:divide-gray-700 dark:bg-gray-900"
     >
-      <thead class="ltr:text-left rtl:text-right">
-      <tr>
-        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
-          ID
-        </th>
-        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
-          Description
-        </th>
-        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">Amount</th>
-        <th class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
-          Created At
-        </th>
-      </tr>
-      </thead>
+      <TableHeaderComponent
+        :columns="['ID','Description', 'Amount', 'Created at', '']"
+      />
 
       <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
       <tr v-for="transaction in transactions.data" :key="transaction.id">
@@ -44,8 +33,22 @@
             })
           }}
         </td>
+        <td class="text-center">
+          <MenuComponent>
+            <template #trigger>
+              <EllipsisVerticalIcon class="size-5" />
+            </template>
+            <template #content>
+              <MenuItemComponent>
+                <div class="flex justify-end gap-2 text-red-600">
+                  <TrashIcon class="size-4"/>
+                  Delete
+                </div>
+              </MenuItemComponent>
+            </template>
+          </MenuComponent>
+        </td>
       </tr>
-
       </tbody>
     </table>
   </div>
@@ -53,6 +56,10 @@
 
 <script setup>
 import { transactionStore } from "@/store/transactionStore";
+import TableHeaderComponent from "@/components/finance/TableHeaderComponent";
+import { EllipsisVerticalIcon, TrashIcon } from "@heroicons/vue/24/solid";
+import MenuComponent from "@/components/finance/MenuComponent";
+import MenuItemComponent from "@/components/finance/MenuItemComponent";
 
 const transactions = transactionStore()
 </script>

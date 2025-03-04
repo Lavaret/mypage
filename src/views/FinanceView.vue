@@ -27,7 +27,7 @@
         {{ error }}
       </AlertComponent>
     </Teleport>
-
+    
     <LoginComponent v-if="!user.loggedIn" @login="(username, password) => handleLogin(username, password)"/>
 
     <div v-if="user.loggedIn" class="flex flex-col gap-4 md:w-2/3 w-full text-left m-auto">
