@@ -1,13 +1,13 @@
 <template>
-  <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-700">
+  <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-zinc-600">
     <table
-        class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm dark:divide-gray-700 dark:bg-gray-900"
+        class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm dark:divide-zinc-900 dark:bg-zinc-700"
     >
       <TableHeaderComponent
         :columns="['ID','Description', 'Amount', 'Created at', '']"
       />
 
-      <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+      <tbody class="divide-y divide-gray-200 dark:divide-zinc-900">
       <tr v-for="transaction in transactions.data" :key="transaction.id">
         <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
           {{ transaction.id }}
@@ -39,7 +39,7 @@
               <EllipsisVerticalIcon class="size-5" />
             </template>
             <template #content>
-              <MenuItemComponent>
+              <MenuItemComponent @click="handleDelete(transaction.id)">
                 <div class="flex justify-end gap-2 text-red-600">
                   <TrashIcon class="size-4"/>
                   Delete
@@ -62,6 +62,10 @@ import MenuComponent from "@/components/finance/MenuComponent";
 import MenuItemComponent from "@/components/finance/MenuItemComponent";
 
 const transactions = transactionStore()
+
+const handleDelete = (id) => {
+  console.log(id)
+}
 </script>
 
 <style scoped>
