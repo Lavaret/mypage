@@ -117,7 +117,6 @@ const showTransactions = async () => {
 }
 
 const handleFormSubmit = async () => {
-  console.log(formRef.value.formData)
   const data = await addTransaction({
     ...formRef.value.formData,
     user_id: user.data.id
