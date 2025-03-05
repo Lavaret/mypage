@@ -1,13 +1,14 @@
 <template>
-  <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-zinc-600">
+  <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-600">
     <table
-        class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm dark:divide-zinc-900 dark:bg-zinc-700"
+        class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm dark:divide-gray-900 dark:bg-gray-700"
     >
       <TableHeaderComponent
-        :columns="['ID','Description', 'Amount', 'Created at', '']"
+          class="bg-gray-900"
+          :columns="['ID','Description', 'Amount', 'Created at', '']"
       />
 
-      <tbody class="divide-y divide-gray-200 dark:divide-zinc-900">
+      <tbody class="divide-y divide-gray-200 dark:divide-gray-900">
       <tr v-for="transaction in transactions.data" :key="transaction.id">
         <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
           {{ transaction.id }}

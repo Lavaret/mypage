@@ -1,10 +1,10 @@
 <template>
-  <div>
-    <button @click="showMenu = !showMenu">
+  <div class="relative">
+    <button @click="showMenu = !showMenu" ref="target">
       <slot name="trigger"/>
     </button>
     <div
-        class="fixed translate-x-[-7rem] w-44 z-10 mt-2 rounded-md border border-gray-100 bg-white shadow-lg dark:border-gray-800 dark:bg-gray-900"
+        class="absolute end-0 w-44 z-10 mt-2 rounded-md border border-gray-100 bg-white shadow-lg dark:border-gray-800 dark:bg-gray-900"
         role="menu"
         v-if="showMenu"
     >
@@ -17,9 +17,17 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { onClickOutside } from "@vueuse/core"
+import { ref, useTemplateRef } from "vue";
 
 const showMenu = ref(false);
+const target = useTemplateRef('target')
+
+onClickOutside(target, () => {
+  if (showMenu.value) {
+    showMenu.value = false
+  }
+})
 </script>
 
 <style scoped>
