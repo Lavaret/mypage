@@ -3,9 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint",
+    "serve": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint . --fix",
     "test": "vitest"
   },
   "dependencies": {
@@ -18,12 +19,11 @@
     "crypto-js": "^4.1.1",
     "pinia": "^3.0.1",
     "vite": "^6.2.0",
+    "vite-plugin-vue-devtools": "^7.7.2",
     "vue": "^3.4.0",
     "vue-router": "^4.2.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.16",
-    "@babel/eslint-parser": "^7.12.16",
     "@testing-library/vue": "^7.0.0",
     "@vue/cli": "^5.0.8",
     "@vue/cli-plugin-babel": "^5.0.0",
@@ -31,6 +31,7 @@
     "@vue/test-utils": "^2.4.1",
     "autoprefixer": "^10.4.16",
     "eslint": "^7.32.0",
+    "jsdom": "^26.0.0",
     "eslint-plugin-vue": "^8.0.3",
     "happy-dom": "^17.1.8",
     "postcss": "^8.4.31",
@@ -46,9 +47,6 @@
       "plugin:vue/vue3-essential",
       "eslint:recommended"
     ],
-    "parserOptions": {
-      "parser": "@babel/eslint-parser"
-    },
     "rules": {}
   },
   "browserslist": [

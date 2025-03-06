@@ -31,8 +31,8 @@
 
 import InfoCaption from "@/components/InfoCaption";
 import AnswerInput from "@/components/AnswerInput";
-import compassImage from "/public/img/compass.png";
-import compassArrowImage from '/public/img/compass-arrow.png';
+import compassImage from "@/img/compass.png";
+import compassArrowImage from '@/img/compass-arrow.png';
 import { compass } from "@/composables/answers";
 import { defineEmits, ref } from 'vue';
 import GameComponent from "@/components/games/GameComponent";

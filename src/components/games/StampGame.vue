@@ -15,7 +15,7 @@
 
       <div class="envelope m-auto bg-stone-200">
         <div class="stamp p-6 flex justify-end">
-          <img width="70" class="rotate-[8deg]" :src="stampImage" @load="loaded = true" />
+          <img width="70" class="rotate-[8deg]" alt="stamp" :src="stampImage" @load="loaded = true" />
         </div>
         <div class=" p-2 flex justify-end">
           <div class="address">
@@ -38,7 +38,7 @@
 <script setup>
 import InfoCaption from "@/components/InfoCaption";
 import AnswerInput from "@/components/AnswerInput";
-import stampImage from '/public/img/Stamp.png';
+import stampImage from '@/img/Stamp.png';
 import { stamp } from "@/composables/answers";
 import GameComponent from "@/components/games/GameComponent";
 import { ref } from 'vue'
@@ -48,8 +48,6 @@ const loaded = ref(false)
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Herr+Von+Muellerhoff&display=swap');
-
 .envelope {
   min-height: 300px;
   max-width: 600px;

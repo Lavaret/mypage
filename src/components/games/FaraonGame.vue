@@ -33,7 +33,6 @@ function goToNextLevel() {
 </script>
 
 <style scoped>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Egyptian+Hieroglyphs&display=swap');
 
 .name-box {
   padding: 1rem;
