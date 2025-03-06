@@ -142,7 +142,6 @@ const handleFormSubmit = async () => {
 }
 
 const handleBlocked = (reason) => {
-  showAlert.value = true
   error.value = reason
 }
 

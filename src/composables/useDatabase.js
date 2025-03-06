@@ -7,7 +7,7 @@ export function useDatabase() {
 
     console.log('**getting supabase client')
     const client = createClient(supabaseUrl, supabaseAnonKey);
-    const error = ref('test')
+    const error = ref(false)
     const loading = ref(false)
 
     const supabaseCall = async (callback) => {
@@ -58,10 +58,20 @@ export function useDatabase() {
         ))
     )
 
+    const deleteTransaction = (id) => {
+        const { error } = client
+            .from('Transactions')
+            .delete()
+            .eq('id', id)
+
+        return error
+    }
+
     return {
         login,
         getTransactions,
         addTransaction,
+        deleteTransaction,
         error,
         loading
     };

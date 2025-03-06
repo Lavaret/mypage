@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-gray-600">
+  <div class="overflow-x-auto overflow-y-visible rounded-lg">
     <table
         class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm dark:divide-gray-900 dark:bg-gray-700"
     >
@@ -61,11 +61,22 @@ import TableHeaderComponent from "@/components/finance/TableHeaderComponent";
 import { EllipsisVerticalIcon, TrashIcon } from "@heroicons/vue/24/solid";
 import MenuComponent from "@/components/finance/MenuComponent";
 import MenuItemComponent from "@/components/finance/MenuItemComponent";
+import { useDatabase } from "@/composables/useDatabase";
+
+const {
+  deleteTransaction,
+} = useDatabase();
 
 const transactions = transactionStore()
 
 const handleDelete = (id) => {
-  console.log(id)
+  const error = deleteTransaction(id)
+
+  if (error) {
+    console.log(error.value)
+  } else {
+    transactions.data = transactions.data.filter((transaction) => transaction.id !== id)
+  }
 }
 </script>
 

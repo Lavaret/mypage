@@ -1,7 +1,7 @@
 <template>
   <a
       href="#"
-      class="block rounded-lg px-4 py-2 w-full text-right text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300"
+      class="block rounded-lg z-50 px-4 py-2 w-full text-right text-sm text-gray-500 hover:bg-gray-50 hover:text-gray-700 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-gray-300"
       role="menuitem"
   >
     <slot/>
