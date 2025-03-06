@@ -7,5 +7,6 @@ export const userStore = defineStore('user-store', {
         access_token: null,
         expires_in: null,
         expires_at: null,
+        failedLogins: 0,
     }),
 })

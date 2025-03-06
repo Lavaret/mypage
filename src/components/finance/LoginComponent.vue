@@ -25,6 +25,7 @@
             <input
                 type="email"
                 v-model="username"
+                :disabled="disabled"
                 class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-xs bg-gray-600"
                 placeholder="Enter email"
             />
@@ -55,6 +56,7 @@
             <input
                 type="password"
                 v-model="password"
+                :disabled="disabled"
                 class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-xs bg-gray-600"
                 placeholder="Enter password"
             />
@@ -84,7 +86,7 @@
           </div>
         </div>
 
-        <button @click.prevent="$emit('login', username, password)"
+        <button @click.prevent="handleSubmit"
             type="submit"
             class="block w-full rounded-lg bg-green-600 px-5 py-3 text-sm font-medium text-white"
         >
@@ -98,10 +100,20 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, defineProps, defineEmits } from 'vue'
 
 const username = ref('');
 const password = ref('');
+const props = defineProps(['disabled'])
+const emit = defineEmits(['login'])
+
+const handleSubmit = () => {
+  if (!props.disabled) {
+    emit('login', username.value, password.value)
+  } else {
+    emit('blocked', 'Too many failed logins!')
+  }
+}
 
 </script>
 

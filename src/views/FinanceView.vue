@@ -28,7 +28,12 @@
       </AlertComponent>
     </Teleport>
     
-    <LoginComponent v-if="!user.loggedIn" @login="(username, password) => handleLogin(username, password)"/>
+    <LoginComponent
+        v-if="!user.loggedIn"
+        @login="(username, password) => handleLogin(username, password)"
+        @blocked="handleBlocked"
+        :disabled="disabledLogin"
+    />
 
     <div v-if="user.loggedIn" class="flex flex-col gap-4 md:w-2/3 w-full text-left m-auto">
 
@@ -56,11 +61,10 @@ import FinanceForm from "@/components/finance/FinanceForm";
 import { useDatabase } from "@/composables/useDatabase";
 import { userStore } from '@/store/userStore'
 import { transactionStore } from "@/store/transactionStore";
-import { onMounted, computed } from "vue";
+import { onMounted, computed, ref, watch } from "vue";
 import ButtonComponent from "@/components/ButtonComponent";
 import { PlusIcon } from "@heroicons/vue/16/solid";
 import ModalComponent from "@/components/ModalComponent";
-import { ref, watch } from 'vue';
 import AlertComponent from "@/components/AlertComponent";
 
 const user = userStore()
@@ -68,6 +72,7 @@ const transactions = transactionStore()
 const showModal = ref(false);
 const showAlert = ref(false);
 const formRef = ref(null);
+const disabledLogin = computed(() => user.failedLogins > 5)
 
 const totalAmount = computed(() => {
   let amount = 0;
@@ -103,6 +108,8 @@ const handleLogin = async (username, password) => {
     })
 
     showTransactions()
+  } else {
+    user.failedLogins += 1
   }
 }
 
@@ -132,6 +139,11 @@ const handleFormSubmit = async () => {
 
     showModal.value = false
   }
+}
+
+const handleBlocked = (reason) => {
+  showAlert.value = true
+  error.value = reason
 }
 
 onMounted( () => {

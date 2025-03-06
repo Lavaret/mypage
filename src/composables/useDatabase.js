@@ -2,8 +2,8 @@ import { createClient } from '@supabase/supabase-js'
 import { ref } from 'vue'
 
 export function useDatabase() {
-    const supabaseUrl = process.env.VUE_APP_SUPABASE_URL;
-    const supabaseAnonKey = process.env.VUE_APP_SUPABASE_ANON_KEY;
+    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+    const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
     console.log('**getting supabase client')
     const client = createClient(supabaseUrl, supabaseAnonKey);
