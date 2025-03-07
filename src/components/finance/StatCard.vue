@@ -32,7 +32,7 @@
 
 <script setup>
 import { ArrowTrendingUpIcon, ArrowTrendingDownIcon } from '@heroicons/vue/16/solid'
-import { computed, defineProps } from "vue";
+import { computed } from "vue";
 
 const props = defineProps({
   currentAmount: {

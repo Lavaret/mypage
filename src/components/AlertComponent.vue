@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-import {computed, defineProps} from 'vue'
+import { computed } from 'vue'
 import { CheckCircleIcon, XMarkIcon, XCircleIcon } from "@heroicons/vue/24/outline"
 
 const props = defineProps({

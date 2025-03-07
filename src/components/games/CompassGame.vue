@@ -34,7 +34,7 @@ import AnswerInput from "@/components/AnswerInput";
 import compassImage from "@/img/compass.png";
 import compassArrowImage from '@/img/compass-arrow.png';
 import { compass } from "@/composables/answers";
-import { defineEmits, ref } from 'vue';
+import { ref } from 'vue';
 import GameComponent from "@/components/games/GameComponent";
 
 const emit = defineEmits(['nextLevel']);

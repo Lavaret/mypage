@@ -23,7 +23,6 @@
 </template>
 
 <script setup>
-import { defineProps } from "vue";
 import LoaderComponent from "@/components/LoaderComponent";
 
 const props = defineProps({

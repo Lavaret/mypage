@@ -9,7 +9,7 @@
 </template>
 
 <script setup>
-import { defineProps, ref, defineEmits } from 'vue';
+import { ref } from 'vue';
 import { useValidateAnswer } from "@/composables/useValidateAnswer";
 import {getRandomGood, getRandomWrong} from "@/composables/reactions";
 import ButtonComponent from "@/components/ButtonComponent";

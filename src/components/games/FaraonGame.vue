@@ -19,7 +19,6 @@
 
 <script setup>
 import {faraon} from "@/composables/answers";
-import {defineEmits} from "vue";
 import AnswerInput from "@/components/AnswerInput";
 import GameComponent from "@/components/games/GameComponent";
 
