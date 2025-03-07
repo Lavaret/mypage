@@ -17,16 +17,6 @@
         </template>
       </modal-component>
     </Teleport>
-
-    <Teleport to="#app">
-      <AlertComponent
-          v-show="showAlert"
-          type="error"
-          @close-alert="showAlert = false"
-      >
-        {{ error }}
-      </AlertComponent>
-    </Teleport>
     
     <LoginComponent
         v-if="!user.loggedIn"
@@ -65,8 +55,9 @@ import { onMounted, computed, ref, watch } from "vue";
 import ButtonComponent from "@/components/ButtonComponent";
 import { PlusIcon } from "@heroicons/vue/16/solid";
 import ModalComponent from "@/components/ModalComponent";
-import AlertComponent from "@/components/AlertComponent";
+import { alertStore } from '@/store/alertStore'
 
+const alerts = alertStore()
 const user = userStore()
 const transactions = transactionStore()
 const showModal = ref(false);
@@ -142,7 +133,7 @@ const handleFormSubmit = async () => {
 }
 
 const handleBlocked = (reason) => {
-  error.value = reason
+  alerts.addError(reason)
 }
 
 onMounted( () => {
@@ -153,12 +144,7 @@ onMounted( () => {
 
 watch(error, () => {
   if (error.value) {
-    showAlert.value = true;
-
-    setTimeout(() => {
-      showAlert.value = false;
-      error.value = ''
-    }, 3690)
+    alerts.addError(error.value)
   }
 })
 
