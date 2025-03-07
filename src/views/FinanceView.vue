@@ -19,10 +19,8 @@
     </Teleport>
     
     <LoginComponent
-        v-if="!user.loggedIn"
-        @login="(username, password) => handleLogin(username, password)"
-        @blocked="handleBlocked"
-        :disabled="disabledLogin"
+        v-show="!user.loggedIn"
+        @logged-id="showTransactions"
     />
 
     <div v-if="user.loggedIn" class="flex flex-col gap-4 md:w-2/3 w-full text-left m-auto">
@@ -51,7 +49,7 @@ import FinanceForm from "@/components/finance/FinanceForm";
 import { useDatabase } from "@/composables/useDatabase";
 import { userStore } from '@/store/userStore'
 import { transactionStore } from "@/store/transactionStore";
-import { onMounted, computed, ref, watch } from "vue";
+import { onMounted, computed, ref } from "vue";
 import ButtonComponent from "@/components/ButtonComponent";
 import { PlusIcon } from "@heroicons/vue/16/solid";
 import ModalComponent from "@/components/ModalComponent";
@@ -61,9 +59,7 @@ const alerts = alertStore()
 const user = userStore()
 const transactions = transactionStore()
 const showModal = ref(false);
-const showAlert = ref(false);
 const formRef = ref(null);
-const disabledLogin = computed(() => user.failedLogins > 5)
 
 const totalAmount = computed(() => {
   let amount = 0;
@@ -75,33 +71,12 @@ const totalAmount = computed(() => {
 })
 
 const {
-  login,
   getTransactions,
   addTransaction,
-  error,
 } = useDatabase();
 
 const logout = () => {
   user.loggedIn = false
-}
-
-const handleLogin = async (username, password) => {
-
-  const data = await login(username, password)
-
-  if (data) {
-    user.$patch({
-      data: data.user,
-      loggedIn: true,
-      access_token: data.session.access_token,
-      expires_in: data.session.expires_in,
-      expires_at: data.session.expires_at,
-    })
-
-    showTransactions()
-  } else {
-    user.failedLogins += 1
-  }
 }
 
 const showTransactions = async () => {
@@ -128,23 +103,14 @@ const handleFormSubmit = async () => {
       ],
     })
 
+    alerts.addSuccess('Added transaction')
     showModal.value = false
   }
-}
-
-const handleBlocked = (reason) => {
-  alerts.addError(reason)
 }
 
 onMounted( () => {
   if (user.loggedIn && !transactions.data) {
     showTransactions()
-  }
-})
-
-watch(error, () => {
-  if (error.value) {
-    alerts.addError(error.value)
   }
 })
 

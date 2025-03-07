@@ -86,12 +86,14 @@
           </div>
         </div>
 
-        <button @click.prevent="handleSubmit"
+        <button @click.prevent="handleLogin"
             type="submit"
             class="block w-full rounded-lg bg-green-600 px-5 py-3 text-sm font-medium text-white"
         >
           Sign in
         </button>
+
+        <button @click.prevent="alerts.addSuccess('test')">click</button>
 
       </form>
 
@@ -100,18 +102,44 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref} from 'vue'
+import { useDatabase } from "@/composables/useDatabase";
+import { userStore } from '@/store/userStore'
+import { alertStore } from '@/store/alertStore'
+
+const emit = defineEmits(['loggedIn'])
+
+const { login } = useDatabase();
+const user = userStore()
+const alerts = alertStore()
 
 const username = ref('');
 const password = ref('');
-const props = defineProps(['disabled'])
-const emit = defineEmits(['login'])
+const disabled = computed(() => user.failedLogins > 5)
 
-const handleSubmit = () => {
-  if (!props.disabled) {
-    emit('login', username.value, password.value)
-  } else {
-    emit('blocked', 'Too many failed logins!')
+const handleLogin = async () => {
+  if (disabled.value) {
+    alerts.addError('Too many failed logins!')
+  }
+
+  try {
+    const data = await login(username.value, password.value)
+
+    if (data) {
+      user.$patch({
+        data: data.user,
+        loggedIn: true,
+        access_token: data.session.access_token,
+        expires_in: data.session.expires_in,
+        expires_at: data.session.expires_at,
+      })
+
+      emit('loggedId')
+    } else {
+      user.failedLogins += 1
+    }
+  } catch (error) {
+    alerts.addError(error.message)
   }
 }
 

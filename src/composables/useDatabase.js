@@ -7,29 +7,22 @@ export function useDatabase() {
 
     console.log('**getting supabase client')
     const client = createClient(supabaseUrl, supabaseAnonKey);
-    const error = ref(false)
     const loading = ref(false)
 
     const supabaseCall = async (callback) => {
-        try {
-            loading.value = true
-            const { data, error } = await callback()
+        loading.value = true
+        const { data, error } = await callback()
 
-            if (error) {
-                console.error('Error:', error.message);
-                throw new Error(`Error: ${error.message}`);
-            }
-
-            return data;
-        } catch (err) {
-            error.value = err.message;
-            return null;
-        } finally {
-            loading.value = false;
+        if (error) {
+            console.error('Error:', error.message);
+            throw new Error(`Error: ${error.message}`);
         }
+
+        loading.value = false
+        return data;
     }
 
-    const login = (email, password) => (
+    const login = async (email, password) => (
         supabaseCall(() => (
             client.auth.signInWithPassword({
                 email: email,
@@ -58,23 +51,20 @@ export function useDatabase() {
         ))
     )
 
-    const deleteTransaction = (id) => {
-        const { error } = client
-            .from('Transactions')
-            .delete()
-            .eq('id', id)
-
-        if (error) {
-            throw error
-        }
-    }
+    const deleteTransaction = (id) => (
+        supabaseCall(() => (
+            client
+                .from('Transactions')
+                .delete()
+                .eq('id', id)
+        ))
+    )
 
     return {
         login,
         getTransactions,
         addTransaction,
         deleteTransaction,
-        error,
         loading
     };
 }

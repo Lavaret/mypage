@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-x-auto overflow-y-visible rounded-lg">
+  <div class="overflow-y-auto list rounded-lg">
     <table
         class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm dark:divide-gray-900 dark:bg-gray-700"
     >
@@ -62,20 +62,26 @@ import { EllipsisVerticalIcon, TrashIcon } from "@heroicons/vue/24/solid";
 import MenuComponent from "@/components/finance/MenuComponent";
 import MenuItemComponent from "@/components/finance/MenuItemComponent";
 import { useDatabase } from "@/composables/useDatabase";
+import { alertStore } from '@/store/alertStore'
 
 const {
   deleteTransaction,
 } = useDatabase();
 
 const transactions = transactionStore()
+const alerts = alertStore()
 
-const handleDelete = (id) => {
+const handleDelete = async (id) => {
   try {
-    deleteTransaction(id)
-  } catch (error) {
-    console.error(error.value)
-  } finally {
+    await deleteTransaction(id)
+
     transactions.data = transactions.data.filter((transaction) => transaction.id !== id)
+
+    alerts.addSuccess('transaction removed')
+  } catch (error) {
+    alerts.addError(error)
+  } finally {
+
   }
 }
 </script>

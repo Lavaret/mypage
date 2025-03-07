@@ -1,10 +1,10 @@
 <template>
   <div
       role="alert"
-      class="rounded-xl border border-gray-100 bg-white p-4 max-w-[400px]"
+      class="rounded-xl border border-gray-100 bg-gray-50/15 p-4 max-w-[400px]"
       :class="{
-      'bg-green-600/15 border-green-700': props.type === 'success',
-      'bg-red-600/15 border-red-700': props.type === 'error'
+      'bg-green-600/25 border-green-700': props.type === 'success',
+      'bg-red-600/25 border-red-700': props.type === 'error'
     }"
   >
     <div class="flex items-start gap-4">
