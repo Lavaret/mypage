@@ -70,11 +70,11 @@ const {
 const transactions = transactionStore()
 
 const handleDelete = (id) => {
-  const error = deleteTransaction(id)
-
-  if (error) {
-    console.log(error.value)
-  } else {
+  try {
+    deleteTransaction(id)
+  } catch (error) {
+    console.error(error.value)
+  } finally {
     transactions.data = transactions.data.filter((transaction) => transaction.id !== id)
   }
 }

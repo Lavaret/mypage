@@ -64,7 +64,9 @@ export function useDatabase() {
             .delete()
             .eq('id', id)
 
-        return error
+        if (error) {
+            throw error
+        }
     }
 
     return {
