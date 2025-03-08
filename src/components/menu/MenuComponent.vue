@@ -1,10 +1,11 @@
 <template>
-  <div class="relative">
-    <button @click="showMenu = !showMenu" ref="target">
+  <div class="">
+    <button @click="handleShowMenu" ref="target" class="hover:bg-gray-900 p-1 rounded">
       <slot name="trigger"/>
     </button>
     <div
-        class="absolute end-0 w-44 z-10 mt-2 rounded-md border border-gray-100 bg-white shadow-lg dark:border-gray-800 dark:bg-gray-900"
+        class="absolute w-44 z-10 mt-2 rounded-md border border-gray-100 bg-white shadow-lg dark:border-gray-800 dark:bg-gray-900"
+        :style="{ top: `${posY}px`, left: `${posX}px` }"
         role="menu"
         v-if="showMenu"
     >
@@ -18,10 +19,22 @@
 
 <script setup>
 import { onClickOutside } from "@vueuse/core"
+import { useMouse } from '@vueuse/core'
 import { ref, useTemplateRef } from "vue";
 
 const showMenu = ref(false);
 const target = useTemplateRef('target')
+const { x, y, sourceType } = useMouse()
+const posX = ref(0)
+const posY = ref(0)
+
+
+
+const handleShowMenu = () => {
+  showMenu.value = !showMenu.value
+  posX.value = x.value - 170;
+  posY.value = y.value + 15;
+}
 
 onClickOutside(target, () => {
   if (showMenu.value) {

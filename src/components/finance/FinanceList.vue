@@ -51,6 +51,13 @@
         </td>
       </tr>
       </tbody>
+      <tfoot class="footer h-10 bg-gray-900 text-center w-full">
+        <tr>
+          <td colspan="5">
+            {{ transactions.data.length }} transactions visible
+          </td>
+        </tr>
+      </tfoot>
     </table>
   </div>
 </template>
@@ -59,8 +66,8 @@
 import { transactionStore } from "@/store/transactionStore";
 import TableHeaderComponent from "@/components/finance/TableHeaderComponent";
 import { EllipsisVerticalIcon, TrashIcon } from "@heroicons/vue/24/solid";
-import MenuComponent from "@/components/finance/MenuComponent";
-import MenuItemComponent from "@/components/finance/MenuItemComponent";
+import MenuComponent from "@/components/menu/MenuComponent";
+import MenuItemComponent from "@/components/menu/MenuItemComponent";
 import { useDatabase } from "@/composables/useDatabase";
 import { alertStore } from '@/store/alertStore'
 

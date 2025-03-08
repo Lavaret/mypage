@@ -93,8 +93,6 @@
           Sign in
         </button>
 
-        <button @click.prevent="alerts.addSuccess('test')">click</button>
-
       </form>
 
     </div>
