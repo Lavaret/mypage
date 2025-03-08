@@ -42,6 +42,14 @@
 </template>
 
 <script setup>
+let meta = document.querySelector('meta[name="viewport"]');
+if (!meta) {
+  meta = document.createElement('meta');
+  meta.name = "viewport";
+  document.head.appendChild(meta);
+}
+
+meta.content = "width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes";
 
 </script>
 
@@ -156,6 +164,7 @@
   height: 10px;
   background: linear-gradient(to bottom, darkslategrey, cornflowerblue);
   margin-right: -5px;
+  animation-duration: 75s;
 }
 
 .planet.mars {

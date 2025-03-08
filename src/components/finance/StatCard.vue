@@ -46,7 +46,10 @@ const props = defineProps({
 })
 
 const increasing = computed(() => (props.currentAmount >= props.previousAmount))
-const difference = computed(() => (props.currentAmount * 100 / props.previousAmount))
+const difference = computed(() => {
+  const amount = props.currentAmount * 100 / props.previousAmount
+  return amount.toFixed(2)
+})
 
 </script>
 

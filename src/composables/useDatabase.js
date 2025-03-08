@@ -1,12 +1,7 @@
-import { createClient } from '@supabase/supabase-js'
 import { ref } from 'vue'
+import { client } from '@/db/supabaseClient'
 
 export function useDatabase() {
-    const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
-    const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
-
-    console.log('**getting supabase client')
-    const client = createClient(supabaseUrl, supabaseAnonKey);
     const loading = ref(false)
 
     const supabaseCall = async (callback) => {

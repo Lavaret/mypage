@@ -20,12 +20,12 @@
     
     <LoginComponent
         v-show="!user.loggedIn"
-        @logged-id="showTransactions"
+        @logged-in="showTransactions"
     />
 
     <div v-if="user.loggedIn" class="flex flex-col gap-4 md:w-2/3 w-full text-left m-auto">
 
-      <StatCard :current-amount="totalAmount" :previous-amount="1"/>
+      <StatCard :current-amount="totalAmount" :previous-amount="previousAmount"/>
       <div>
         <ButtonComponent @click="showModal = true" size="small" class="ml-auto">
           <PlusIcon class="size-4"/>
@@ -64,6 +64,18 @@ const formRef = ref(null);
 const totalAmount = computed(() => {
   let amount = 0;
   transactions.data.forEach((transaction) => {
+    amount += transaction.amount
+  })
+
+  return Number(amount.toFixed(2))
+})
+
+const previousAmount = computed(() => {
+  const month = new Date().getMonth() - 1
+  const year = new Date().getFullYear()
+  let amount = 0;
+
+  transactions.filterByDate(month, year).forEach((transaction) => {
     amount += transaction.amount
   })
 

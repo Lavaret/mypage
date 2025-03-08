@@ -88,9 +88,16 @@
 
         <button @click.prevent="handleLogin"
             type="submit"
-            class="block w-full rounded-lg bg-green-600 px-5 py-3 text-sm font-medium text-white"
+            class="block w-full shadow rounded-lg bg-green-600 px-5 py-3 text-sm font-medium text-white"
         >
           Sign in
+        </button>
+
+        <button @click.prevent="handleGuestLogin"
+                type="submit"
+                class="block w-full shadow rounded-lg bg-blue-600 px-5 py-3 text-sm font-medium text-white"
+        >
+          Log in as a guest
         </button>
 
       </form>
@@ -105,6 +112,9 @@ import { useDatabase } from "@/composables/useDatabase";
 import { userStore } from '@/store/userStore'
 import { alertStore } from '@/store/alertStore'
 
+const guestEmail = import.meta.env.VITE_GUEST_EMAIL;
+const guestPass = import.meta.env.VITE_GUEST_PASS;
+
 const emit = defineEmits(['loggedIn'])
 
 const { login } = useDatabase();
@@ -114,6 +124,13 @@ const alerts = alertStore()
 const username = ref('');
 const password = ref('');
 const disabled = computed(() => user.failedLogins > 5)
+
+const handleGuestLogin = () => {
+  username.value = guestEmail
+  password.value = guestPass
+
+  handleLogin()
+}
 
 const handleLogin = async () => {
   if (disabled.value) {
@@ -132,7 +149,7 @@ const handleLogin = async () => {
         expires_at: data.session.expires_at,
       })
 
-      emit('loggedId')
+      emit('loggedIn')
     } else {
       user.failedLogins += 1
     }
