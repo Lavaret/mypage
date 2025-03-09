@@ -9,6 +9,7 @@
               <input
                   class="w-full rounded-lg h-12 border-gray-200 bg-gray-700 p-3 text-sm"
                   placeholder="Amount"
+                  data-test="input-amount"
                   type="number"
                   id="amount"
                   v-model="formData.amount"
@@ -20,9 +21,48 @@
               <input
                   class="w-full rounded-lg w-full h-12 border-gray-200 bg-gray-700 p-3 text-sm"
                   type="datetime-local"
+                  data-test="input-date"
                   id="date"
                   v-model="formData.created_at"
               />
+            </div>
+
+            <div>
+
+              <div class="relative mt-1.5">
+                <input
+                    type="text"
+                    list="tagList"
+                    id="tags"
+                    v-model="formData.tag"
+                    data-test="input-tag"
+                    class="w-full rounded-lg border-gray-300 h-12 bg-gray-700 ps-3 pe-10 text-gray-200 sm:text-sm [&::-webkit-calendar-picker-indicator]:opacity-0"
+                    placeholder="Select a tag"
+                />
+
+                <span class="absolute inset-y-0 end-0 flex w-8 items-center">
+                  <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke-width="1.5"
+                      stroke="currentColor"
+                      class="size-5 text-gray-500"
+                  >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+                    />
+                  </svg>
+                </span>
+              </div>
+
+              <datalist name="tagList" id="tagList">
+                <option value="1">Groceries</option>
+                <option value="2">Media</option>
+                <option value="3">Savings</option>
+              </datalist>
             </div>
 
             <div>
@@ -33,6 +73,7 @@
                   placeholder="Description"
                   rows="8"
                   id="description"
+                  data-test="input-description"
                   v-model="formData.description"
               ></textarea>
             </div>
@@ -49,7 +90,8 @@ import { ref } from 'vue'
 const formData = ref({
   amount: 100,
   created_at: new Date(),
-  description: ''
+  description: '',
+  tag: ''
 })
 
 defineExpose({ formData });

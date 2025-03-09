@@ -27,7 +27,7 @@
 
       <StatCard :current-amount="totalAmount" :previous-amount="previousAmount"/>
       <div>
-        <ButtonComponent @click="showModal = true" size="small" class="ml-auto">
+        <ButtonComponent @click="showModal = true" size="small" class="ml-auto" data-test="add-transaction-button">
           <PlusIcon class="size-4"/>
           Add Transaction
         </ButtonComponent>
@@ -74,8 +74,9 @@ const previousAmount = computed(() => {
   const month = new Date().getMonth() - 1
   const year = new Date().getFullYear()
   let amount = 0;
+  const filteredTransactions = transactions.filterByDate(month, year)
 
-  transactions.filterByDate(month, year).forEach((transaction) => {
+  filteredTransactions.forEach((transaction) => {
     amount += transaction.amount
   })
 
@@ -102,8 +103,13 @@ const showTransactions = async () => {
 }
 
 const handleFormSubmit = async () => {
+
+  const { description, amount, created_at } = formRef.value.formData
+
   const data = await addTransaction({
-    ...formRef.value.formData,
+    description,
+    amount,
+    created_at,
     user_id: user.data.id
   })
 

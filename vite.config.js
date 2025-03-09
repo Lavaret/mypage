@@ -21,4 +21,9 @@ export default defineConfig({
         },
         extensions: ['.js', '.ts', '.vue'],
     },
+    test: {
+        globals: true,
+        environment: "jsdom",
+        setupFiles: ['./test/vitest.setup.js'],
+    },
 })

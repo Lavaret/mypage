@@ -9,7 +9,7 @@
       />
 
       <tbody class="divide-y divide-gray-200 dark:divide-gray-900">
-      <tr v-for="transaction in transactions.current" :key="transaction.id">
+      <tr v-for="transaction in transactions.current" :key="transaction.id" data-test="transaction-row">
         <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
           {{ transaction.id }}
         </td>
@@ -17,6 +17,7 @@
           {{ transaction.description }}
         </td>
         <td
+            data-test="amount"
             class="whitespace-nowrap px-4 py-2"
             :class="{
               'text-red-600': transaction.amount < 0,
@@ -63,13 +64,14 @@
 </template>
 
 <script setup>
-import { transactionStore } from "@/store/transactionStore";
-import TableHeaderComponent from "@/components/finance/TableHeaderComponent";
 import { EllipsisVerticalIcon, TrashIcon } from "@heroicons/vue/24/solid";
 import MenuComponent from "@/components/menu/MenuComponent";
 import MenuItemComponent from "@/components/menu/MenuItemComponent";
+import TableHeaderComponent from "@/components/finance/TableHeaderComponent";
 import { useDatabase } from "@/composables/useDatabase";
 import { alertStore } from '@/store/alertStore'
+import { transactionStore } from "@/store/transactionStore";
+
 
 
 const {
