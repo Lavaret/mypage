@@ -13,13 +13,21 @@ transactions.data = [
         id: 1,
         description: 'Test transaction 0',
         created_at: new Date(),
-        amount: -100
+        amount: -100,
+        TransactionTag: [
+            {
+                Tags: {
+                    name: 'Tag'
+                }
+            }
+        ]
     },
     {
         id: 2,
         description: 'Test transaction 1',
         created_at: new Date(),
-        amount: 200
+        amount: 200,
+        TransactionTag: []
     }
 ]
 
@@ -49,4 +57,20 @@ describe("FinanceList.vue", () => {
         expect(firstAmountElement.classes()).toContain('text-red-600')
         expect(secondAmountElement.classes()).toContain('text-green-600')
     });
+
+    it("has column tags", () => {
+        expect(wrapper.vm.columnsTitles).toContain('Tags')
+    })
+
+    it('displays tag if tag is present in transaction', () => {
+        const tagsCells = wrapper.findAll('[data-test="tag"]')
+        expect(tagsCells).toHaveLength(2)
+
+        for (let i = 0; i < 2; i++) {
+            const tags = transactions.data[i].TransactionTag
+            if (tags.length) {
+                expect(tagsCells[i].text()).toContain(tags[0].Tags.name)
+            }
+        }
+    })
 });

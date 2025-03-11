@@ -30,7 +30,14 @@ export function useDatabase() {
         supabaseCall(() => (
             client
                 .from('Transactions')
-                .select('*')
+                .select(`
+                    *,
+                    TransactionTag (
+                        Tags (
+                            name
+                        )
+                    )
+                  `)
                 .eq('user_id', userId)
         ))
     )

@@ -5,7 +5,7 @@
     >
       <TableHeaderComponent
           class="bg-gray-900"
-          :columns="['ID','Description', 'Amount', 'Created at', '']"
+          :columns="columnsTitles"
       />
 
       <tbody class="divide-y divide-gray-200 dark:divide-gray-900">
@@ -25,6 +25,14 @@
             }"
         >
           {{ transaction.amount }}
+        </td>
+        <td
+          data-test="tag"
+          class="whitespace-nowrap px-4 py-2"
+        >
+          <div v-for="tag in transaction.TransactionTag">
+            {{ tag.Tags.name }}
+          </div>
         </td>
         <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
           {{ new Date(transaction.created_at).toLocaleDateString('pl-PL', {
@@ -54,7 +62,7 @@
       </tbody>
       <tfoot class="footer h-10 bg-gray-900 text-center w-full">
         <tr>
-          <td colspan="5">
+          <td :colspan="columnsTitles.length">
             {{ transactions.current.length }} transactions visible
           </td>
         </tr>
@@ -72,11 +80,18 @@ import { useDatabase } from "@/composables/useDatabase";
 import { alertStore } from '@/store/alertStore'
 import { transactionStore } from "@/store/transactionStore";
 
-
-
 const {
   deleteTransaction,
 } = useDatabase();
+
+const columnsTitles = [
+  'ID',
+  'Description',
+  'Amount',
+  'Tags',
+  'Created at',
+  ''
+]
 
 const transactions = transactionStore()
 const alerts = alertStore()
@@ -85,13 +100,11 @@ const handleDelete = async (id) => {
   try {
     await deleteTransaction(id)
 
-    transactions.data = transactions.data.filter((transaction) => transaction.id !== id)
-
     alerts.addSuccess('transaction removed')
   } catch (error) {
     alerts.addError(error)
   } finally {
-
+    await transactions.loadTransactions()
   }
 }
 </script>

@@ -1,4 +1,8 @@
 import { defineStore } from 'pinia'
+import { useDatabase } from "@/composables/useDatabase";
+import { userStore } from '@/store/userStore'
+
+const { getTransactions } = useDatabase()
 
 export const transactionStore = defineStore('transaction-store', {
     state: () => ({
@@ -16,6 +20,8 @@ export const transactionStore = defineStore('transaction-store', {
                 return tDate.getMonth() === currentMonth && tDate.getFullYear() === currentYear;
             });
         },
+
+
     },
 
     actions: {
@@ -25,5 +31,19 @@ export const transactionStore = defineStore('transaction-store', {
                 return tDate.getMonth() === month && tDate.getFullYear() === year;
             })
         },
+
+        async loadTransactions() {
+            const user = userStore()
+
+            try {
+                const data = await getTransactions(user.data.id)
+
+                if (data) {
+                    this.data = data
+                }
+            } catch (e) {
+                console.error(e)
+            }
+        }
     }
 })

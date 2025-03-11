@@ -20,7 +20,7 @@
     
     <LoginComponent
         v-show="!user.loggedIn"
-        @logged-in="showTransactions"
+        @logged-in="transactions.loadTransactions()"
     />
 
     <div v-if="user.loggedIn" class="flex flex-col gap-4 md:w-2/3 w-full text-left m-auto">
@@ -32,6 +32,7 @@
           Add Transaction
         </ButtonComponent>
       </div>
+
       <FinanceList />
 
       <br/>
@@ -84,23 +85,12 @@ const previousAmount = computed(() => {
 })
 
 const {
-  getTransactions,
   addTransaction,
   assignTagToTransaction,
 } = useDatabase();
 
 const logout = () => {
   user.loggedIn = false
-}
-
-const showTransactions = async () => {
-  const data = await getTransactions(user.data.id)
-
-  if (data) {
-    transactions.$patch({
-      data: data,
-    })
-  }
 }
 
 const handleFormSubmit = async () => {
@@ -115,11 +105,11 @@ const handleFormSubmit = async () => {
   })
 
   if (data) {
-    transactions.data.push(data)
-    addTag(data.id, tag)
+    await addTag(data.id, tag)
 
     alerts.addSuccess('Added transaction')
     showModal.value = false
+    await transactions.loadTransactions()
   }
 }
 
@@ -133,7 +123,7 @@ const addTag = async (transactionId, tagId) => {
 
 onMounted( () => {
   if (user.loggedIn && !transactions.data) {
-    showTransactions()
+    transactions.loadTransactions()
   }
 })
 
