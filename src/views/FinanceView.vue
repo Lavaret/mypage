@@ -86,6 +86,7 @@ const previousAmount = computed(() => {
 const {
   getTransactions,
   addTransaction,
+  assignTagToTransaction,
 } = useDatabase();
 
 const logout = () => {
@@ -104,9 +105,9 @@ const showTransactions = async () => {
 
 const handleFormSubmit = async () => {
 
-  const { description, amount, created_at } = formRef.value.formData
+  const { description, amount, created_at, tag } = formRef.value.formData
 
-  const data = await addTransaction({
+  const [data] = await addTransaction({
     description,
     amount,
     created_at,
@@ -114,15 +115,19 @@ const handleFormSubmit = async () => {
   })
 
   if (data) {
-    transactions.$patch({
-      data: [
-          ...data,
-          ...transactions.data
-      ],
-    })
+    transactions.data.push(data)
+    addTag(data.id, tag)
 
     alerts.addSuccess('Added transaction')
     showModal.value = false
+  }
+}
+
+const addTag = async (transactionId, tagId) => {
+  try {
+    await assignTagToTransaction(transactionId, tagId)
+  } catch (error) {
+    alerts.addError(error)
   }
 }
 

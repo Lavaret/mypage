@@ -10,7 +10,7 @@ export function useDatabase() {
 
         if (error) {
             console.error('Error:', error.message);
-            throw new Error(`Error: ${error.message}`);
+            throw new Error(error.message);
         }
 
         loading.value = false
@@ -55,11 +55,23 @@ export function useDatabase() {
         ))
     )
 
+    const assignTagToTransaction = (transaction_id, tag_id) => (
+        supabaseCall(() => (
+            client
+                .from('TransactionTag')
+                .insert([
+                    { transaction_id, tag_id },
+                ])
+                .select()
+        ))
+    )
+
     return {
         login,
         getTransactions,
         addTransaction,
         deleteTransaction,
+        assignTagToTransaction,
         loading
     };
 }

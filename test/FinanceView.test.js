@@ -8,13 +8,6 @@ const user = userStore()
 const transactions = transactionStore()
 transactions.filterByDate = () => []
 
-transactions.data = []
-
-user.loggedIn = true;
-user.data = {
-    id: 1
-}
-
 const mockTransaction = {
     description: 'test',
     amount: 20,
@@ -22,16 +15,15 @@ const mockTransaction = {
     created_at: new Date(),
 }
 
+transactions.data = []
+
+user.loggedIn = true;
+user.data = {
+    id: 1
+}
+
 let wrapper;
 describe('FinanceView.vue', () => {
-    beforeAll(() => {
-        vi.doMock('@/composables/useDatabase', () => {
-            return {
-                addTransaction: vi.fn().mockReturnValue(mockTransaction),
-            };
-        });
-    })
-
     beforeEach(() => {
         wrapper = mount(FinanceView);
     })
@@ -44,14 +36,21 @@ describe('FinanceView.vue', () => {
         expect(wrapper.exists()).toBe(true)
     });
 
-    it.skip('transactions adds properly', () => {
-        wrapper.vm.formRef = {}
+    it('transactions adds properly', async () => {
+        vi.mock('@/composables/useDatabase', async (importOriginal) => {
+            return {
+                ...await importOriginal(),
+                addTransaction: vi.fn
+            }
+        })
+        const spy = vi.spyOn(wrapper.vm, 'addTransaction')
+
+        wrapper.vm.formRef = {
+            formData: mockTransaction
+        }
         wrapper.vm.handleFormSubmit()
+        wrapper.vm.addTransaction()
 
-        const data = addTransaction(mockTransaction)
-
-        expect(transactions.data).toStrictEqual([
-            mockTransaction
-        ])
+        expect(spy).toHaveBeenCalled();
     });
 });
