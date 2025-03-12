@@ -1,6 +1,6 @@
 <template>
   <div class="">
-    <button @click="handleShowMenu" ref="target" class="hover:bg-gray-900 p-1 rounded">
+    <button @click="handleShowMenu" data-test="action-button" ref="target" class="hover:bg-gray-900 p-1 rounded">
       <slot name="trigger"/>
     </button>
     <div

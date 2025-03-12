@@ -49,6 +49,12 @@
               <EllipsisVerticalIcon class="size-5" />
             </template>
             <template #content>
+              <MenuItemComponent>
+                <div class="flex justify-end gap-2">
+                  <PencilSquareIcon class="size-4"/>
+                  Edit
+                </div>
+              </MenuItemComponent>
               <MenuItemComponent @click="handleDelete(transaction.id)">
                 <div class="flex justify-end gap-2 text-red-600">
                   <TrashIcon class="size-4"/>
@@ -72,7 +78,7 @@
 </template>
 
 <script setup>
-import { EllipsisVerticalIcon, TrashIcon } from "@heroicons/vue/24/solid";
+import { EllipsisVerticalIcon, TrashIcon, PencilSquareIcon } from "@heroicons/vue/24/solid";
 import MenuComponent from "@/components/menu/MenuComponent";
 import MenuItemComponent from "@/components/menu/MenuItemComponent";
 import TableHeaderComponent from "@/components/finance/TableHeaderComponent";

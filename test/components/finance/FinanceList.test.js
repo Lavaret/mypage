@@ -1,10 +1,12 @@
-import { shallowMount, config } from "@vue/test-utils";
+import { mount, config } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
 import FinanceList from "@/components/finance/FinanceList.vue";
 import TableHeaderComponent from "@/components/finance/TableHeaderComponent.vue";
+import MenuComponent from "@/components/menu/MenuComponent";
+import MenuItemComponent from "@/components/menu/MenuItemComponent";
 import { transactionStore } from "@/store/transactionStore";
 
-config.global.plugins = [TableHeaderComponent]
+config.global.components = [TableHeaderComponent, MenuComponent, MenuItemComponent]
 
 const transactions = transactionStore()
 
@@ -34,7 +36,7 @@ transactions.data = [
 let wrapper;
 describe("FinanceList.vue", () => {
     beforeEach(() => {
-        wrapper = shallowMount(FinanceList);
+        wrapper = mount(FinanceList);
     })
     it("renders component", () => {
         expect(wrapper).toBeTruthy()
@@ -72,5 +74,15 @@ describe("FinanceList.vue", () => {
                 expect(tagsCells[i].text()).toContain(tags[0].Tags.name)
             }
         }
+    })
+
+    it('shows edit menu item', async () => {
+        const actionButton = wrapper.find('[data-test="action-button"]')
+        expect(actionButton.exists()).toBe(true)
+
+        await actionButton.trigger('click')
+
+        const menuItems = wrapper.findAll('[role="menuitem"]')
+        expect(menuItems.some((item) => item.element.textContent.includes('Edit'))).toBe(true)
     })
 });
