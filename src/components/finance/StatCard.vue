@@ -21,7 +21,7 @@
 
       <p class="flex gap-2 text-xs">
         <span class="font-medium"> {{ `${difference}%` }} </span>
-        <span class="text-gray-500 dark:text-gray-400"> Since last week </span>
+        <span class="text-gray-500 dark:text-gray-400"> Since last month </span>
       </p>
 
     </div>

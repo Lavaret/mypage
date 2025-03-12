@@ -64,7 +64,7 @@ const formRef = ref(null);
 
 const totalAmount = computed(() => {
   let amount = 0;
-  transactions.data.forEach((transaction) => {
+  transactions.current.forEach((transaction) => {
     amount += transaction.amount
   })
 
@@ -105,6 +105,7 @@ const handleFormSubmit = async () => {
   })
 
   if (data) {
+
     await addTag(data.id, tag)
 
     alerts.addSuccess('Added transaction')
@@ -116,8 +117,8 @@ const handleFormSubmit = async () => {
 const addTag = async (transactionId, tagId) => {
   try {
     await assignTagToTransaction(transactionId, tagId)
-  } catch (error) {
-    alerts.addError(error)
+  } catch {
+    alerts.addError('cannot add new tag')
   }
 }
 
