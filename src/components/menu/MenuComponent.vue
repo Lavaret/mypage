@@ -4,7 +4,7 @@
       <slot name="trigger"/>
     </button>
     <div
-        class="absolute w-44 z-10 mt-2 rounded-md border border-gray-100 bg-white shadow-lg dark:border-gray-800 dark:bg-gray-900"
+        class="absolute min-w-35 z-10 mt-2 rounded-md border border-gray-100 bg-white shadow-lg dark:border-gray-800 dark:bg-gray-900"
         :style="{ top: `${posY}px`, left: `${posX}px` }"
         role="menu"
         v-if="showMenu"
@@ -32,7 +32,7 @@ const posY = ref(0)
 
 const handleShowMenu = () => {
   showMenu.value = !showMenu.value
-  posX.value = x.value - 170;
+  posX.value = x.value - 110;
   posY.value = y.value + 15;
 }
 

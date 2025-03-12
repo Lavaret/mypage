@@ -50,15 +50,15 @@
             </template>
             <template #content>
               <MenuItemComponent>
-                <div class="flex justify-end gap-2">
+                <div class="flex justify-between gap-2">
                   <PencilSquareIcon class="size-4"/>
-                  Edit
+                  <span>Edit</span>
                 </div>
               </MenuItemComponent>
               <MenuItemComponent @click="handleDelete(transaction.id)">
-                <div class="flex justify-end gap-2 text-red-600">
+                <div class="flex justify-between gap-2 text-red-600">
                   <TrashIcon class="size-4"/>
-                  Delete
+                  <span>Delete</span>
                 </div>
               </MenuItemComponent>
             </template>
