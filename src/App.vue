@@ -14,7 +14,7 @@
       </AlertContainer>
   </Teleport>
 
-  <div class="flex flex-col justify-between">
+  <div class="flex flex-col justify-between" data-theme="dark">
     <SimpleHeader/>
     <router-view></router-view>
     <FooterComponent></FooterComponent>

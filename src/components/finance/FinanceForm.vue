@@ -3,6 +3,41 @@
     <div class="mx-auto max-w-screen-xl">
       <div class="grid grid-cols-1 gap-x-16 gap-y-8">
         <div class="p-3 sm:p-8">
+          <Vueform v-model="formData" @save="handleSave">
+            <TextElement
+                input-type="number"
+                name="amount"
+                data-test="input-amount"
+                id="amount"
+                v-model="formData.amount"
+                :add-class="{
+                  input: 'rounded-lg h-12 border-gray-200 bg-gray-700 p-3 text-sm'
+                }"
+            />
+            <TextElement
+                input-type="datetime-local"
+                name="created_at"
+                data-test="input-date"
+                id="created_at"
+                v-model="formData.created_at"
+                :add-class="{
+                  input: 'rounded-lg w-full h-12 border-gray-200 bg-gray-700 p-3 leading-4'
+                }"
+            />
+            <TagsElement
+                :create="true"
+                v-model="formData.tags"
+                name="tags"
+                data-test="input-tags"
+                id="tags"
+                :items="[
+                  { value: 'vuejs', label: 'Vue.js' },
+                  { value: 'react', label: 'React' },
+                  { value: 'angularjs', label: 'AngularJS' },
+                ]"
+            />
+          </Vueform>
+          <br />
           <form class="space-y-4">
             <div>
               <label class="sr-only" for="Amount">Amount</label>
@@ -94,6 +129,8 @@ const props = defineProps({
   }
 })
 
+// const builder$ = ref(null)
+
 const formData = ref({
   amount: 100,
   created_at: new Date(),
@@ -101,16 +138,26 @@ const formData = ref({
   tag: ''
 })
 
+const handleSave = (builderObject, history) => {
+  console.log(builderObject, history)
+}
+
 defineExpose({ formData });
 
 onMounted(() => {
   if (props.savedData?.id) {
     Object.assign(formData.value, props.savedData)
   }
+
+  //
+  // console.log(builder$.value.builder) // builderObject
+  // console.log(builder$.value.History.history) // hi
 })
 
 </script>
 
 <style scoped>
-
+.form-gap-y-gutter {
+  gap: 2rem;
+}
 </style>

@@ -14,6 +14,7 @@
     "@supabase/supabase-js": "^2.49.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@vitejs/plugin-vue": "^5.2.1",
+    "@vueform/vueform": "^1.12.4",
     "@vueuse/core": "^12.8.2",
     "core-js": "^3.8.3",
     "crypto-js": "^4.1.1",

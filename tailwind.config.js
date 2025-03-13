@@ -1,6 +1,11 @@
 module.exports = {
+  content: [
+    './vueform.config.js',
+    './node_modules/@vueform/vueform/themes/tailwind/**/*.vue',
+    './node_modules/@vueform/vueform/themes/tailwind/**/*.js',
+  ],
   purge: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx}'],
-  darkMode: 'media', // or 'class'
+  darkMode: ['selector', '[data-theme="dark"]'],
   theme: {
     extend: {
       keyframes: {
@@ -14,8 +19,13 @@ module.exports = {
       }
     },
   },
+  extend: {
+    form: (theme) => ({})
+  },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@vueform/vueform/tailwind'),
+  ],
 }

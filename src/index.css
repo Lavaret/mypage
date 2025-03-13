@@ -2,6 +2,33 @@
 @tailwind components;
 @tailwind utilities;
 
+:root, :before, :after, * {
+    --vf-border-color-input: #14b8a6;
+    --vf-bg-input: #343434;
+
+    --vf-gray-50: pink;
+    --vf-gray-100: pink;
+    --vf-gray-200: pink;
+    --vf-gray-300: #d1d5db;
+    --vf-gray-400: #9ca3af;
+    --vf-gray-500: #6b7280;
+    --vf-gray-600: #4b5563;
+    --vf-gray-700: #374151;
+    --vf-gray-800: #1f2937;
+    --vf-gray-900: #111827;
+
+    --vf-dark-50: #f9fafb;
+    --vf-dark-100: #f3f4f6;
+    --vf-dark-200: #e5e7eb;
+    --vf-dark-300: #d1d5db;
+    --vf-dark-400: #9ca3af;
+    --vf-dark-500: #6b7280;
+    --vf-dark-600: #4b5563;
+    --vf-dark-700: #374151;
+    --vf-dark-800: #1f2937;
+    --vf-dark-900: #111827;
+}
+
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
