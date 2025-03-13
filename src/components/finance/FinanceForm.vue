@@ -85,7 +85,14 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { onMounted, ref } from 'vue'
+
+const props = defineProps({
+  savedData: {
+    type: Object,
+    default: () => {}
+  }
+})
 
 const formData = ref({
   amount: 100,
@@ -95,6 +102,12 @@ const formData = ref({
 })
 
 defineExpose({ formData });
+
+onMounted(() => {
+  if (props.savedData?.id) {
+    Object.assign(formData.value, props.savedData)
+  }
+})
 
 </script>
 

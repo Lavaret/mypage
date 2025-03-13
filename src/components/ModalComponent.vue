@@ -8,7 +8,7 @@
     leave-active-class="transition duration-200"
   >
     <div v-if="show" class="modal-mask z-20">
-      <div class="modal-container rounded-md shadow">
+      <div class="modal-container rounded-md shadow" data-test="modal">
         <header class="w-full text-left text-lg p-2 bg-gray-900 rounded-t-md shadow">
           <slot name="header">Header</slot>
         </header>
@@ -45,13 +45,5 @@ defineProps({
   width: 60vw;
   max-width: 500px;
   min-width: 200px;
-}
-
-input[type="date"]
-{
-  display:block;
-  -webkit-appearance: textfield;
-  -moz-appearance: textfield;
-  min-height: 1.2em;
 }
 </style>

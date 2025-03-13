@@ -1,4 +1,4 @@
-import { mount } from '@vue/test-utils';
+import { mount, shallowMount } from '@vue/test-utils';
 import { describe, it, expect } from 'vitest';
 import FinanceForm from '@/components/finance/FinanceForm.vue';
 
@@ -51,3 +51,25 @@ describe('Finance Form', () => {
         })
     })
 });
+
+const transactionMock = {
+    id: 1,
+    amount: 100,
+    created_at: '',
+    description: 'Test transaction',
+    tag: ''
+}
+
+describe('Edit form', () => {
+    beforeEach(() => {
+        wrapper = shallowMount(FinanceForm, {
+            props: {
+                savedData: transactionMock
+            }
+        });
+    })
+
+    it('shows properly saved transaction in the form', () => {
+        expect(wrapper.vm.formData).toStrictEqual(transactionMock)
+    })
+})

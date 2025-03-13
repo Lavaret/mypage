@@ -1,5 +1,26 @@
 <template>
   <div class="overflow-y-auto list rounded-lg">
+    <Teleport to="#app">
+      <modal-component :show="showModal" >
+        <template #header>
+          Edit transaction
+        </template>
+        <template #default>
+          <FinanceForm ref="formRef" :saved-data="editedTransaction" />
+        </template>
+        <template #footer>
+          <ButtonComponent size="small" @click="showModal = false">
+            <XMarkIcon class="size-4" />
+            <span>Cancel</span>
+          </ButtonComponent>
+          <ButtonComponent size="small" type="secondary">
+            <ArrowUpTrayIcon class="size-4"/>
+            <span>Update</span>
+          </ButtonComponent>
+        </template>
+      </modal-component>
+    </Teleport>
+
     <table
         class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm dark:divide-gray-900 dark:bg-gray-700"
     >
@@ -49,7 +70,7 @@
               <EllipsisVerticalIcon class="size-5" />
             </template>
             <template #content>
-              <MenuItemComponent>
+              <MenuItemComponent @click="handleEditTransaction(transaction.id)">
                 <div class="flex justify-between gap-2">
                   <PencilSquareIcon class="size-4"/>
                   <span>Edit</span>
@@ -78,13 +99,24 @@
 </template>
 
 <script setup>
-import { EllipsisVerticalIcon, TrashIcon, PencilSquareIcon } from "@heroicons/vue/24/solid";
+import {
+  EllipsisVerticalIcon,
+  TrashIcon,
+  PencilSquareIcon,
+  ArrowUpTrayIcon,
+  XMarkIcon
+} from "@heroicons/vue/24/solid";
 import MenuComponent from "@/components/menu/MenuComponent";
 import MenuItemComponent from "@/components/menu/MenuItemComponent";
 import TableHeaderComponent from "@/components/finance/TableHeaderComponent";
+import ButtonComponent from "@/components/ButtonComponent";
+import ModalComponent from "@/components/ModalComponent";
+import FinanceForm from "@/components/finance/FinanceForm";
 import { useDatabase } from "@/composables/useDatabase";
 import { alertStore } from '@/store/alertStore'
 import { transactionStore } from "@/store/transactionStore";
+import { ref } from 'vue';
+
 
 const {
   deleteTransaction,
@@ -102,6 +134,10 @@ const columnsTitles = [
 const transactions = transactionStore()
 const alerts = alertStore()
 
+const showModal = ref(false)
+const formRef = ref(null)
+const editedTransaction = ref(null)
+
 const handleDelete = async (id) => {
   try {
     await deleteTransaction(id)
@@ -112,6 +148,11 @@ const handleDelete = async (id) => {
   } finally {
     await transactions.loadTransactions()
   }
+}
+
+const handleEditTransaction = (id) => {
+  showModal.value = true
+  editedTransaction.value = transactions.data.find((t) => t.id === id)
 }
 </script>
 

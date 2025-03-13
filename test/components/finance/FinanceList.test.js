@@ -6,7 +6,15 @@ import MenuComponent from "@/components/menu/MenuComponent";
 import MenuItemComponent from "@/components/menu/MenuItemComponent";
 import { transactionStore } from "@/store/transactionStore";
 
-config.global.components = [TableHeaderComponent, MenuComponent, MenuItemComponent]
+config.global.components = [
+    TableHeaderComponent,
+    MenuComponent,
+    MenuItemComponent,
+]
+
+config.global.stubs =  {
+    teleport: true
+}
 
 const transactions = transactionStore()
 
@@ -36,7 +44,9 @@ transactions.data = [
 let wrapper;
 describe("FinanceList.vue", () => {
     beforeEach(() => {
-        wrapper = mount(FinanceList);
+        wrapper = mount(FinanceList, {
+            attachTo: document.body
+        });
     })
     it("renders component", () => {
         expect(wrapper).toBeTruthy()
@@ -84,5 +94,12 @@ describe("FinanceList.vue", () => {
 
         const menuItems = wrapper.findAll('[role="menuitem"]')
         expect(menuItems.some((item) => item.element.textContent.includes('Edit'))).toBe(true)
+    })
+
+    it('shows modal after clicking edit and gets edited transaction', async () => {
+        wrapper.vm.handleEditTransaction(1)
+        expect(wrapper.vm.showModal).toBe(true)
+
+        expect(wrapper.vm.editedTransaction.id).toBe(1)
     })
 });
