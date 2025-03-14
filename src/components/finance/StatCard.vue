@@ -1,6 +1,6 @@
 <template>
   <article
-      class="rounded-lg border shadow border-gray-100 bg-white p-6 dark:border-gray-800 dark:bg-gray-900"
+      class="rounded-lg border shadow border-gray-100 bg-white p-6 dark:border-gray-800 dark:bg-gray-900/75"
   >
     <div>
       <p class="text-sm text-gray-500 dark:text-gray-400">Profit</p>

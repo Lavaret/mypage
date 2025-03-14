@@ -20,7 +20,7 @@
 <script setup>
 import { onClickOutside } from "@vueuse/core"
 import { useMouse } from '@vueuse/core'
-import { ref, useTemplateRef } from "vue";
+import {ref, useTemplateRef} from "vue";
 
 const showMenu = ref(false);
 const target = useTemplateRef('target')

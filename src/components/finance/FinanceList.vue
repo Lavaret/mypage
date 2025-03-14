@@ -1,5 +1,5 @@
 <template>
-  <div class="overflow-y-auto list rounded-lg">
+  <div class="overflow-y-auto list rounded">
     <Teleport to="#app">
       <modal-component :show="showModal" >
         <template #header>
@@ -28,7 +28,7 @@
       <tr>
         <th
             v-for="(column, index) in columnsTitles"
-            class="whitespace-nowrap font-medium text-gray-900 dark:text-white bg-gray-900"
+            class="whitespace-nowrap font-medium text-gray-900 dark:text-white bg-gray-900/75"
             :key="index"
         >
           {{ column }}
@@ -163,7 +163,11 @@ const handleEditTransaction = (id) => {
 </script>
 
 <style scoped>
-td, th {
-  @apply py-2;
+td {
+  @apply py-2 px-4;
+}
+
+th {
+  @apply py-3 px-4;
 }
 </style>

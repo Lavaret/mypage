@@ -1,32 +1,30 @@
 <template>
-<div class="traveller on-trip invisible">
-  <p>🛸</p>
+<div class="traveller absolute invisible" :style="{ transform: `translate(${x + 150}px, ${y - 100}px)` }"
+>
+  <p class="animate-bounce">🛸</p>
 </div>
 </template>
 
 <script setup>
+import { useMouse } from "@vueuse/core";
+
+const { x, y } = useMouse()
+
 setTimeout(() => {
   let traveller = document.querySelector('.traveller');
 
   if(traveller) {
     traveller.classList.remove('on-trip', 'invisible');
   }
-}, 3000);
+}, 100);
 </script>
 
 <style scoped>
 
 .traveller {
-  top: 0px;
-  left: -20px;
-  position: absolute;
   transition-property: transform;
-  transition-duration: 10s;
-  transition-timing-function: ease-in;
+  transition-duration: 1s;
+  transition-timing-function: ease-in-out;
   rotate: 18deg;
-}
-
-.on-trip {
-  transform: translate3d(110vw, 40vh, 10px);
 }
 </style>

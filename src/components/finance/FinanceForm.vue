@@ -67,7 +67,7 @@
               <textarea
                   class="w-full rounded-lg border-gray-200 bg-gray-700 p-3 text-sm"
                   placeholder="Description"
-                  rows="8"
+                  rows="3"
                   id="description"
                   data-test="input-description"
                   v-model="formData.description"
