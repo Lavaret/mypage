@@ -107,7 +107,7 @@ const handleFormSubmit = async () => {
 
   if (data) {
 
-    // TODO can i add multiple tags at once?
+    // TODO: can i add multiple tags at once?
     for (let i = 0; i < tags.length; i++) {
       await addTag(data.id, tags[i].id)
     }

@@ -26,6 +26,7 @@
                 type="email"
                 v-model="username"
                 :disabled="disabled"
+                required
                 class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-xs bg-gray-600"
                 placeholder="Enter email"
             />
@@ -57,6 +58,7 @@
                 type="password"
                 v-model="password"
                 :disabled="disabled"
+                required
                 class="w-full rounded-lg border-gray-200 p-4 pe-12 text-sm shadow-xs bg-gray-600"
                 placeholder="Enter password"
             />
@@ -86,7 +88,7 @@
           </div>
         </div>
 
-        <button @click.prevent="handleLogin"
+        <button @click.prevent="handleLogin(true)"
             type="submit"
             class="block w-full shadow rounded-lg bg-green-600 px-5 py-3 text-sm font-medium text-white"
         >
@@ -126,19 +128,28 @@ const password = ref('');
 const disabled = computed(() => user.failedLogins > 5)
 
 const handleGuestLogin = () => {
-  username.value = guestEmail
-  password.value = guestPass
-
-  handleLogin()
+  handleLogin(false)
 }
 
-const handleLogin = async () => {
+const handleLogin = async (withCredentials = false) => {
   if (disabled.value) {
-    alerts.addError('Too many failed logins!')
+    alerts.addError('You are blocked!')
   }
 
+  if(withCredentials && (!username.value || !password.value)) {
+    alerts.addError('Provide credentials!')
+    return
+  }
+
+  let data = null
+
   try {
-    const data = await login(username.value, password.value)
+    if (!withCredentials) {
+      data = await login(guestEmail, guestPass)
+    } else {
+      data = await login(username.value, password.value)
+    }
+
 
     if (data) {
       user.$patch({
