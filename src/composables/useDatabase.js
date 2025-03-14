@@ -34,6 +34,7 @@ export function useDatabase() {
                     *,
                     TransactionTag (
                         Tags (
+                            id,
                             name
                         )
                     )

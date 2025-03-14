@@ -102,7 +102,10 @@ defineExpose({ formData });
 
 onMounted(() => {
   if (props.savedData?.id) {
-    Object.assign(formData.value, props.savedData)
+    formData.value.description = props.savedData.description
+    formData.value.amount = props.savedData.amount
+    formData.value.created_at = new Date(props.savedData.created_at).toISOString().slice(0, 19)
+    formData.value.tags = props.savedData.TransactionTag.map((tag) => (tag.Tags))
   }
 })
 
