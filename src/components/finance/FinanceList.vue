@@ -22,24 +22,31 @@
     </Teleport>
 
     <table
-        class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm dark:divide-gray-900 dark:bg-gray-700"
+        class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm dark:divide-gray-900 dark:bg-gray-700/50"
     >
-      <TableHeaderComponent
-          class="bg-gray-900"
-          :columns="columnsTitles"
-      />
+      <thead class="ltr:text-left rtl:text-right">
+      <tr>
+        <th
+            v-for="(column, index) in columnsTitles"
+            class="whitespace-nowrap font-medium text-gray-900 dark:text-white bg-gray-900"
+            :key="index"
+        >
+          {{ column }}
+        </th>
+      </tr>
+      </thead>
 
       <tbody class="divide-y divide-gray-200 dark:divide-gray-900">
       <tr v-for="transaction in transactions.current" :key="transaction.id" data-test="transaction-row">
-        <td class="whitespace-nowrap px-4 py-2 font-medium text-gray-900 dark:text-white">
+        <td class="whitespace-nowrap px-4 font-medium text-gray-900 dark:text-white">
           {{ transaction.id }}
         </td>
-        <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
+        <td class="whitespace-nowrap text-gray-700 dark:text-gray-200">
           {{ transaction.description }}
         </td>
         <td
             data-test="amount"
-            class="whitespace-nowrap px-4 py-2"
+            class="whitespace-nowrap"
             :class="{
               'text-red-600': transaction.amount < 0,
               'text-green-600': transaction.amount > 0
@@ -49,13 +56,13 @@
         </td>
         <td
           data-test="tag"
-          class="whitespace-nowrap px-4 py-2"
+          class="whitespace-nowrap"
         >
           <div v-for="tag in transaction.TransactionTag">
             {{ tag.Tags.name }}
           </div>
         </td>
-        <td class="whitespace-nowrap px-4 py-2 text-gray-700 dark:text-gray-200">
+        <td class="whitespace-nowrap text-gray-700 dark:text-gray-200">
           {{ new Date(transaction.created_at).toLocaleDateString('pl-PL', {
               month: 'long',
               day: 'numeric',
@@ -108,7 +115,6 @@ import {
 } from "@heroicons/vue/24/solid";
 import MenuComponent from "@/components/menu/MenuComponent";
 import MenuItemComponent from "@/components/menu/MenuItemComponent";
-import TableHeaderComponent from "@/components/finance/TableHeaderComponent";
 import ButtonComponent from "@/components/ButtonComponent";
 import ModalComponent from "@/components/ModalComponent";
 import FinanceForm from "@/components/finance/FinanceForm";
@@ -157,5 +163,7 @@ const handleEditTransaction = (id) => {
 </script>
 
 <style scoped>
-
+td, th {
+  @apply py-2;
+}
 </style>

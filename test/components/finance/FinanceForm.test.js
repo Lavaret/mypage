@@ -9,6 +9,7 @@ const inputsSelectors = {
     amount: '[data-test="input-amount"]',
     tag: '[data-test="input-tag"]',
 }
+const now = '2025-03-08T11:10:08.446+00:00'
 
 describe('Finance Form', () => {
     beforeEach(() => {
@@ -37,16 +38,15 @@ describe('Finance Form', () => {
     });
 
     it('reflects changes from form in form data', () => {
-        const now = '2025-03-09T16:05:59.508Z'
-        wrapper.find(inputsSelectors.tag).setValue('savings')
         wrapper.find(inputsSelectors.amount).setValue(150)
         wrapper.find(inputsSelectors.description).setValue('test')
         wrapper.vm.formData.created_at = now
+        wrapper.vm.formData.tags = [{ name: 'savings' }]
 
         expect(wrapper.vm.formData).toStrictEqual({
             description: 'test',
             amount: 150,
-            tag: 'savings',
+            tags:  [{ name: 'savings' }],
             created_at: now
         })
     })
@@ -55,9 +55,13 @@ describe('Finance Form', () => {
 const transactionMock = {
     id: 1,
     amount: 100,
-    created_at: '',
+    created_at: now,
     description: 'Test transaction',
-    tag: ''
+    TransactionTag: [{
+        Tags: {
+            name: 'tag'
+        }
+    }]
 }
 
 describe('Edit form', () => {
@@ -70,6 +74,11 @@ describe('Edit form', () => {
     })
 
     it('shows properly saved transaction in the form', () => {
-        expect(wrapper.vm.formData).toStrictEqual(transactionMock)
+        expect(wrapper.vm.formData).toStrictEqual({
+            description: 'Test transaction',
+            amount: 100,
+            tags:  [{ name: 'tag' }],
+            created_at: '2025-03-08T11:10:08'
+        })
     })
 })

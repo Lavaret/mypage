@@ -1,13 +1,11 @@
 import { mount, config } from "@vue/test-utils";
 import { describe, it, expect } from "vitest";
 import FinanceList from "@/components/finance/FinanceList.vue";
-import TableHeaderComponent from "@/components/finance/TableHeaderComponent.vue";
 import MenuComponent from "@/components/menu/MenuComponent";
 import MenuItemComponent from "@/components/menu/MenuItemComponent";
 import { transactionStore } from "@/store/transactionStore";
 
 config.global.components = [
-    TableHeaderComponent,
     MenuComponent,
     MenuItemComponent,
 ]

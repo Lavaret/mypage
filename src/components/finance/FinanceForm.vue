@@ -81,7 +81,7 @@
 </template>
 
 <script setup>
-import { onMounted, ref } from 'vue'
+import {onMounted, ref} from 'vue'
 import Multiselect from 'vue-multiselect'
 
 const props = defineProps({
@@ -102,10 +102,13 @@ defineExpose({ formData });
 
 onMounted(() => {
   if (props.savedData?.id) {
-    formData.value.description = props.savedData.description
-    formData.value.amount = props.savedData.amount
-    formData.value.created_at = new Date(props.savedData.created_at).toISOString().slice(0, 19)
-    formData.value.tags = props.savedData.TransactionTag.map((tag) => (tag.Tags))
+    const { description, amount, created_at, TransactionTag } = props.savedData
+    formData.value = {
+      description,
+      amount,
+      created_at: new Date(created_at)?.toISOString().slice(0, 19),
+      tags: TransactionTag.map((tag) => (tag.Tags))
+    }
   }
 })
 
