@@ -95,8 +95,9 @@ const logout = () => {
 
 const handleFormSubmit = async () => {
 
-  const { description, amount, created_at, tag } = formRef.value.formData
+  const { description, amount, created_at, tags } = formRef.value.formData
 
+  console.log(tags)
   const [data] = await addTransaction({
     description,
     amount,
@@ -106,7 +107,10 @@ const handleFormSubmit = async () => {
 
   if (data) {
 
-    await addTag(data.id, tag)
+    // TODO can i add multiple tags at once?
+    for (let i = 0; i < tags.length; i++) {
+      await addTag(data.id, tags[i].id)
+    }
 
     alerts.addSuccess('Added transaction')
     showModal.value = false

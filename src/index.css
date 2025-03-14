@@ -18,3 +18,15 @@ input[type="date"]
     min-height: 1.2em;
     width: 100%;
 }
+
+#app .multiselect__tags, #app .multiselect__input, #app .multiselect__input::placeholder {
+    @apply bg-gray-700 border-0 text-white;
+}
+
+#app .multiselect__content-wrapper {
+    @apply bg-gray-500 border-0 text-white;
+}
+
+#app .multiselect__tag {
+    @apply bg-green-600
+}

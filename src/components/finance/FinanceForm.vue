@@ -29,40 +29,36 @@
 
             <div>
 
-              <div class="relative mt-1.5">
-                <input
-                    type="text"
-                    list="tagList"
-                    id="tags"
-                    v-model="formData.tag"
-                    data-test="input-tag"
-                    class="w-full rounded-lg border-gray-300 h-12 bg-gray-700 ps-3 pe-10 text-gray-200 sm:text-sm [&::-webkit-calendar-picker-indicator]:opacity-0"
-                    placeholder="Select a tag"
-                />
-
-                <span class="absolute inset-y-0 end-0 flex w-8 items-center">
-                  <svg
-                      xmlns="http://www.w3.org/2000/svg"
-                      fill="none"
-                      viewBox="0 0 24 24"
-                      stroke-width="1.5"
-                      stroke="currentColor"
-                      class="size-5 text-gray-500"
-                  >
-                    <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
-                    />
-                  </svg>
-                </span>
-              </div>
-
-              <datalist name="tagList" id="tagList">
-                <option value="1">Groceries</option>
-                <option value="2">Media</option>
-                <option value="3">Savings</option>
-              </datalist>
+              <multiselect
+                  v-model="formData.tags"
+                  id="tags"
+                  data-test="input-tag"
+                  :multiple="true"
+                  :options="[
+                      {
+                        id: 1,
+                        name: 'Groceries',
+                      },
+                      {
+                        id: 2,
+                        name: 'Media',
+                      },
+                      {
+                        id: 3,
+                        name: 'Savings'
+                      }
+                  ]"
+                  placeholder="Select tags"
+                  track-by="id"
+                  label="name"
+                  select-label="Add!"
+                  selected-label=""
+                  deselect-label="Remove"
+              >
+                <template #noResult>
+                  No elements found
+                </template>
+              </multiselect>
             </div>
 
             <div>
@@ -86,6 +82,7 @@
 
 <script setup>
 import { onMounted, ref } from 'vue'
+import Multiselect from 'vue-multiselect'
 
 const props = defineProps({
   savedData: {
@@ -98,7 +95,7 @@ const formData = ref({
   amount: 100,
   created_at: new Date(),
   description: '',
-  tag: ''
+  tags: ''
 })
 
 defineExpose({ formData });
@@ -110,7 +107,7 @@ onMounted(() => {
 })
 
 </script>
-
-<style scoped>
+<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style scoped lang="scss">
 
 </style>
