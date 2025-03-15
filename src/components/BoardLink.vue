@@ -12,6 +12,7 @@
       :href="props.link"
       class="transition delay-150 duration-300 ease-in-out hover:-translate-y-1 hover:scale-110 text-3xl p-4 transition active:border-0 duration-300 ease-out shadow rounded-lg h-32 flex items-center border-r-2 border-b-4"
       :class="props.class"
+      target="_blank"
   >
     <slot/>
   </a>

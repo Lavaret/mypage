@@ -3,7 +3,7 @@
   transform: `translate(${posX}px, ${posY}px)`,
 }"
 >
-  <p>🛸</p>
+  <p class="animate-bounce">🛸</p>
 </div>
 </template>
 
@@ -39,6 +39,7 @@ watch(x, () => {
 .traveller {
   transition-property: transform;
   transition-duration: 2s;
+  transform: translate(-10px, -10px);
   transition-timing-function: ease-in-out;
   rotate: 18deg;
   will-change: transform;
