@@ -22,13 +22,13 @@
     </Teleport>
 
     <table
-        class="min-w-full divide-y-2 divide-gray-200 bg-white text-sm dark:divide-gray-900 dark:bg-gray-700/50"
+        class="min-w-full divide-y-2 text-sm divide-gray-900 bg-gray-700/50"
     >
       <thead class="ltr:text-left rtl:text-right">
       <tr>
         <th
             v-for="(column, index) in columnsTitles"
-            class="whitespace-nowrap font-medium text-gray-900 dark:text-white bg-gray-900/75"
+            class="whitespace-nowrap font-medium text-white bg-gray-900/75"
             :key="index"
         >
           {{ column }}
@@ -36,12 +36,12 @@
       </tr>
       </thead>
 
-      <tbody class="divide-y divide-gray-200 dark:divide-gray-900">
+      <tbody class="divide-y divide-gray-900">
       <tr v-for="transaction in transactions.current" :key="transaction.id" data-test="transaction-row">
-        <td class="whitespace-nowrap px-4 font-medium text-gray-900 dark:text-white">
+        <td class="whitespace-nowrap px-4 font-medium text-white">
           {{ transaction.id }}
         </td>
-        <td class="whitespace-nowrap text-gray-700 dark:text-gray-200">
+        <td class="whitespace-nowrap text-gray-200">
           {{ transaction.description }}
         </td>
         <td
@@ -62,7 +62,7 @@
             {{ tag.Tags.name }}
           </div>
         </td>
-        <td class="whitespace-nowrap text-gray-700 dark:text-gray-200">
+        <td class="whitespace-nowrap text-gray-200">
           {{ new Date(transaction.created_at).toLocaleDateString('pl-PL', {
               month: 'long',
               day: 'numeric',

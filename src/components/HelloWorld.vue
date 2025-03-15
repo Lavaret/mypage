@@ -1,5 +1,5 @@
 <template>
-  <div class="w-96 m-auto text-left">
+  <div class="max-w-96 m-auto text-left p-3">
     <div class="flex gap-3">
       <h1 class="text-lg text-stone-200">Hi, I'm Justyna</h1>
       <span class="animate-wiggle">👋</span>

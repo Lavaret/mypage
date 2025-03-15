@@ -1,11 +1,11 @@
 <template>
   <article
-      class="rounded-lg border shadow border-gray-100 bg-white p-6 dark:border-gray-800 dark:bg-gray-900/75"
+      class="rounded-lg border shadow border-gray-100 p-6 border-gray-800 bg-gray-900/75"
   >
     <div>
-      <p class="text-sm text-gray-500 dark:text-gray-400">Profit</p>
+      <p class="text-sm text-gray-400">Profit</p>
 
-      <p class="text-2xl font-medium text-gray-900 dark:text-white">{{ `${currentAmount} PLN` }}</p>
+      <p class="text-2xl font-medium text-white">{{ `${currentAmount} PLN` }}</p>
     </div>
 
     <div

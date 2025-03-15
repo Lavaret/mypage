@@ -33,6 +33,7 @@ const alerts = alertStore()
 
 <style>
 html {
+  background-color: #222630;
   @apply bg-gradient-to-r from-[#222630] to-[#333742];
 }
 body {
