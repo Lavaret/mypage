@@ -12,6 +12,7 @@ import AlienTraveller from "@/components/AlienTraveller";
 
 <style scoped>
 body {
-  overflow: hidden;
+  overflow-scrolling: touch;
+  user-select: none;
 }
 </style>

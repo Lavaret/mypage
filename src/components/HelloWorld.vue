@@ -14,3 +14,9 @@
 <script setup>
 
 </script>
+<style>
+* {
+  user-select: none;
+  cursor: default;
+}
+</style>
