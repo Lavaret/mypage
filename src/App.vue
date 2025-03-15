@@ -32,8 +32,10 @@ const alerts = alertStore()
 </script>
 
 <style>
-body {
+:root {
   @apply bg-gradient-to-r from-[#222630] to-[#333742];
+}
+body {
   height: 100vh;
 }
 
