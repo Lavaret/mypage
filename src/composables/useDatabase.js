@@ -63,6 +63,20 @@ export function useDatabase() {
         ))
     )
 
+    const updateTransaction = (id, amount, description, created_at) => (
+        supabaseCall(() => (
+            client
+                .from('Transactions')
+                .update({
+                    amount,
+                    description,
+                    created_at
+                })
+                .eq('id', id)
+                .select()
+        ))
+    )
+
     const assignTagToTransaction = (transaction_id, tag_id) => (
         supabaseCall(() => (
             client
@@ -74,12 +88,34 @@ export function useDatabase() {
         ))
     )
 
+    const assignManyTagsToTransaction = (payload) => (
+        supabaseCall(() => (
+            client
+                .from('TransactionTag')
+                .insert(payload)
+                .select()
+        ))
+    )
+
+    const removeTagFromTransaction = (transactionId, tagId) => {
+        supabaseCall(() => (
+            client
+                .from('TransactionTag')
+                .delete()
+                .eq('transaction_id', transactionId)
+                .eq('tag_id', tagId)
+        ))
+    }
+
     return {
         login,
         getTransactions,
         addTransaction,
         deleteTransaction,
         assignTagToTransaction,
+        assignManyTagsToTransaction,
+        removeTagFromTransaction,
+        updateTransaction,
         loading
     };
 }

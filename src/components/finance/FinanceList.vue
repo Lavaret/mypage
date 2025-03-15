@@ -13,7 +13,7 @@
             <XMarkIcon class="size-4" />
             <span>Cancel</span>
           </ButtonComponent>
-          <ButtonComponent size="small" type="secondary">
+          <ButtonComponent size="small" type="secondary" @click="handleUpdateTransaction">
             <ArrowUpTrayIcon class="size-4"/>
             <span>Update</span>
           </ButtonComponent>
@@ -126,6 +126,7 @@ import { ref } from 'vue';
 
 const {
   deleteTransaction,
+  updateTransaction,
 } = useDatabase();
 
 const columnsTitles = [
@@ -153,6 +154,21 @@ const handleDelete = async (id) => {
     alerts.addError(error)
   } finally {
     await transactions.loadTransactions()
+  }
+}
+
+const handleUpdateTransaction = async () => {
+  const { id, tags: oldTags } = editedTransaction.value
+  const { amount, description, created_at, tags: newTags } = formRef.value.formData
+
+  const updated = await updateTransaction(id, amount, description, created_at)
+
+  if (updated.length) {
+    await transactions.updateTags(id, oldTags, newTags)
+
+    await transactions.loadTransactions()
+
+    showModal.value = false
   }
 }
 
