@@ -37,6 +37,7 @@
             size="small"
             type="positive"
             class="transaction-button"
+            data-test="expense-button"
         >
           <ArrowUpIcon class="size-4"/>
           Expense

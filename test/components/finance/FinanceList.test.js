@@ -22,20 +22,14 @@ transactions.data = [
         description: 'Test transaction 0',
         created_at: new Date(),
         amount: -100,
-        TransactionTag: [
-            {
-                Tags: {
-                    name: 'Tag'
-                }
-            }
-        ]
+        tags: [{ name: 'Tag' }]
     },
     {
         id: 2,
         description: 'Test transaction 1',
         created_at: new Date(),
         amount: 200,
-        TransactionTag: []
+        tags: []
     }
 ]
 
@@ -77,9 +71,9 @@ describe("FinanceList.vue", () => {
         expect(tagsCells).toHaveLength(2)
 
         for (let i = 0; i < 2; i++) {
-            const tags = transactions.data[i].TransactionTag
+            const tags = transactions.data[i].tags
             if (tags.length) {
-                expect(tagsCells[i].text()).toContain(tags[0].Tags.name)
+                expect(tagsCells[i].text()).toContain(tags[0].name)
             }
         }
     })

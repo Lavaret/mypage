@@ -10,7 +10,7 @@
                   class="w-full rounded-lg h-12 border-gray-200 bg-gray-700 p-3 text-xl"
                   placeholder="Amount"
                   data-test="input-amount"
-                  type="tel"
+                  type="number"
                   id="amount"
                   v-model="formData.amount"
               />

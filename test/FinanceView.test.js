@@ -53,4 +53,9 @@ describe('FinanceView.vue', () => {
 
         expect(spy).toHaveBeenCalled();
     });
+
+    it('shows expense button', () => {
+        const button = wrapper.find('[data-test="expense-button"]')
+        expect(button.exists()).toBe(true)
+    })
 });

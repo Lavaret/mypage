@@ -57,11 +57,7 @@ const transactionMock = {
     amount: 100,
     created_at: now,
     description: 'Test transaction',
-    TransactionTag: [{
-        Tags: {
-            name: 'tag'
-        }
-    }]
+    tags: [{ name: 'tag' }],
 }
 
 describe('Edit form', () => {
@@ -78,7 +74,7 @@ describe('Edit form', () => {
             description: 'Test transaction',
             amount: 100,
             tags:  [{ name: 'tag' }],
-            created_at: '2025-03-08T11:10:08'
+            created_at: now
         })
     })
 })
