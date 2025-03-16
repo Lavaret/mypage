@@ -104,7 +104,9 @@ const handleFormSubmit = async () => {
   })
 
   if (data) {
-    await transactions.addManyTags(data.id, newTags)
+    if (data.tags) {
+      await transactions.addManyTags(data.id, newTags)
+    }
 
     alerts.addSuccess('Added transaction')
     showModal.value = false

@@ -58,8 +58,8 @@
           data-test="tag"
           class="whitespace-nowrap"
         >
-          <div v-for="tag in transaction.TransactionTag">
-            {{ tag.Tags.name }}
+          <div v-for="tag in transaction.tags">
+            {{ tag.name }}
           </div>
         </td>
         <td class="whitespace-nowrap text-gray-200">
@@ -167,6 +167,12 @@ const handleUpdateTransaction = async () => {
     await transactions.updateTags(id, oldTags, newTags)
 
     await transactions.loadTransactions()
+
+    //TODO this is not refreshing
+    if(oldTags.length) {
+      const notRefreshedTags = transactions.data.find((transaction) => transaction.id === id)
+      notRefreshedTags.tags = newTags
+    }
 
     showModal.value = false
   }
