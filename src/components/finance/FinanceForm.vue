@@ -7,10 +7,10 @@
             <div>
               <label class="sr-only" for="Amount">Amount</label>
               <input
-                  class="w-full rounded-lg h-12 border-gray-200 bg-gray-700 p-3 text-sm"
+                  class="w-full rounded-lg h-12 border-gray-200 bg-gray-700 p-3 text-xl"
                   placeholder="Amount"
                   data-test="input-amount"
-                  type="number"
+                  type="tel"
                   id="amount"
                   v-model="formData.amount"
               />
@@ -19,7 +19,7 @@
             <div>
               <label class="sr-only" for="date">Date</label>
               <input
-                  class="w-full rounded-lg w-full h-12 border-gray-200 bg-gray-700 p-3 text-sm"
+                  class="w-full rounded-lg w-full h-12 border-gray-200 bg-gray-700 p-3 text-lg"
                   type="datetime-local"
                   data-test="input-date"
                   id="date"
@@ -65,7 +65,7 @@
               <label class="sr-only" for="message">Description</label>
 
               <textarea
-                  class="w-full rounded-lg border-gray-200 bg-gray-700 p-3 text-sm"
+                  class="w-full rounded-lg border-gray-200 bg-gray-700 p-3 text-md"
                   placeholder="Description"
                   rows="3"
                   id="description"

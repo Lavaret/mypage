@@ -3,7 +3,12 @@
     <Teleport to="#app">
       <modal-component :show="showModal" >
         <template #header>
-          New transaction
+          <div v-if="deposit">
+            New deposit
+          </div>
+          <div v-else>
+            New expense
+          </div>
         </template>
         <template #default>
           <FinanceForm ref="formRef"/>
@@ -26,10 +31,25 @@
     <div v-if="user.loggedIn" class="flex flex-col gap-4 md:w-2/3 w-full text-left m-auto">
 
       <StatCard :current-amount="totalAmount" :previous-amount="previousAmount"/>
-      <div>
-        <ButtonComponent @click="showModal = true" size="small" class="ml-auto" data-test="add-transaction-button">
-          <PlusIcon class="size-4"/>
-          Add Transaction
+      <div class="flex gap-4 justify-center sm:ml-auto sm:justify-end flex-row">
+        <ButtonComponent
+            @click="showModal = true"
+            size="small"
+            type="positive"
+            class="transaction-button"
+        >
+          <ArrowUpIcon class="size-4"/>
+          Expense
+        </ButtonComponent>
+        <ButtonComponent
+            @click="deposit = true; showModal = true;"
+             size="small"
+            type="secondary"
+            class="transaction-button"
+             data-test="add-transaction-button"
+        >
+          <ArrowDownIcon class="size-4"/>
+          Deposit
         </ButtonComponent>
       </div>
 
@@ -50,9 +70,9 @@ import FinanceForm from "@/components/finance/FinanceForm";
 import { useDatabase } from "@/composables/useDatabase";
 import { userStore } from '@/store/userStore'
 import { transactionStore } from "@/store/transactionStore";
-import { onMounted, computed, ref } from "vue";
+import { onMounted, computed, ref, watch } from "vue";
 import ButtonComponent from "@/components/ButtonComponent";
-import { PlusIcon } from "@heroicons/vue/16/solid";
+import { ArrowDownIcon, ArrowUpIcon, PlusIcon } from "@heroicons/vue/16/solid";
 import ModalComponent from "@/components/ModalComponent";
 import { alertStore } from '@/store/alertStore'
 
@@ -61,6 +81,7 @@ const user = userStore()
 const transactions = transactionStore()
 const showModal = ref(false);
 const formRef = ref(null);
+const deposit = ref(false);
 
 const totalAmount = computed(() => {
   let amount = 0;
@@ -98,13 +119,13 @@ const handleFormSubmit = async () => {
 
   const [data] = await addTransaction({
     description,
-    amount,
+    amount: deposit.value ? amount : amount * -1,
     created_at,
     user_id: user.data.id
   })
 
   if (data) {
-    if (data.tags) {
+    if (newTags.length) {
       await transactions.addManyTags(data.id, newTags)
     }
 
@@ -113,6 +134,12 @@ const handleFormSubmit = async () => {
     await transactions.loadTransactions()
   }
 }
+
+watch(showModal, () => {
+  if (!showModal.value) {
+    deposit.value = false
+  }
+})
 
 onMounted( () => {
   if (user.loggedIn && !transactions.data) {
@@ -123,5 +150,7 @@ onMounted( () => {
 
 </script>
 <style>
-
+.transaction-button {
+  @apply ml-auto h-20 sm:h-12 m-auto w-1/2 sm:w-auto sm:px-4 justify-center text-xl sm:text-lg
+}
 </style>

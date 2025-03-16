@@ -5,6 +5,7 @@
       :class="{
         'hover:bg-gray-900 bg-gray-800 border-gray-900 hover:border-gray-950': props.type === 'primary',
         'hover:bg-green-600 bg-green-500 border-green-600 hover:border-green-700': props.type === 'secondary',
+        'hover:bg-yellow-500 bg-yellow-600 border-yellow-700 hover:border-yellow-600': props.type === 'positive',
         'p-3 text-lg': props.size === 'normal',
         'py-1 px-2 text-md': props.size === 'small',
       }"

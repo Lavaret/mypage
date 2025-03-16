@@ -58,8 +58,10 @@
           data-test="tag"
           class="whitespace-nowrap"
         >
-          <div v-for="tag in transaction.tags">
-            {{ tag.name }}
+          <div class="flex justify-start flex-wrap gap-1">
+            <div v-for="tag in transaction.tags" class="border text-center rounded-full px-2 bg-stone-300/25 border-stone-300">
+              {{ tag.name }}
+            </div>
           </div>
         </td>
         <td class="whitespace-nowrap text-gray-200">
