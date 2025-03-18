@@ -59,7 +59,14 @@
           class="whitespace-nowrap"
         >
           <div class="flex justify-start flex-wrap gap-1">
-            <div v-for="tag in transaction.tags" class="border text-center rounded-full px-2 bg-stone-300/25 border-stone-300">
+            <div
+                v-for="tag in transaction.tags"
+                class="border text-center rounded-full px-2"
+                :style="{
+                  backgroundColor: `${tag.color}40`,
+                  borderColor: tag.color,
+                }"
+            >
               {{ tag.name }}
             </div>
           </div>

@@ -25,7 +25,9 @@ user.data = {
 let wrapper;
 describe('FinanceView.vue', () => {
     beforeEach(() => {
-        wrapper = mount(FinanceView);
+        wrapper = mount(FinanceView, {
+            attachTo: document.body,
+        });
     })
 
     afterAll(() => {

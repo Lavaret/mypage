@@ -35,11 +35,24 @@ export function useDatabase() {
                     TransactionTag (
                         Tags (
                             id,
-                            name
+                            name,
+                            color
                         )
                     )
                   `)
                 .eq('user_id', userId)
+        ))
+    )
+
+    const getTags = () => (
+        supabaseCall(() => (
+            client
+                .from('Tags')
+                .select(`
+                    id,
+                    name,
+                    color
+                  `)
         ))
     )
 
@@ -110,6 +123,7 @@ export function useDatabase() {
     return {
         login,
         getTransactions,
+        getTags,
         addTransaction,
         deleteTransaction,
         assignTagToTransaction,

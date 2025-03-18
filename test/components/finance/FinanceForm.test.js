@@ -1,6 +1,18 @@
 import { mount, shallowMount } from '@vue/test-utils';
 import { describe, it, expect } from 'vitest';
 import FinanceForm from '@/components/finance/FinanceForm.vue';
+import { tagStore } from "@/store/tagStore";
+
+const tags = tagStore()
+
+const tagMock = [
+    {
+        id: 1,
+        name: 'Test'
+    }
+]
+
+tags.all = tagMock;
 
 let wrapper;
 const inputsSelectors = {
@@ -65,7 +77,8 @@ describe('Edit form', () => {
         wrapper = shallowMount(FinanceForm, {
             props: {
                 savedData: transactionMock
-            }
+            },
+            attachTo: document.body
         });
     })
 
@@ -76,5 +89,15 @@ describe('Edit form', () => {
             tags:  [{ name: 'tag' }],
             created_at: now
         })
+    })
+
+    it('shows tags from store', () => {
+        const tagsInWrapper = wrapper.vm.tags.all
+        expect(tagsInWrapper).toStrictEqual(tagMock)
+
+        const multiselect = wrapper.find('[data-test="input-tag"]');
+        const lengthOfOptionsInComponent = multiselect.attributes().options.split(',').length
+
+        expect(lengthOfOptionsInComponent).toBe(tagsInWrapper.length)
     })
 })

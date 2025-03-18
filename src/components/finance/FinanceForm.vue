@@ -34,20 +34,7 @@
                   id="tags"
                   data-test="input-tag"
                   :multiple="true"
-                  :options="[
-                      {
-                        id: 1,
-                        name: 'Groceries',
-                      },
-                      {
-                        id: 2,
-                        name: 'Media',
-                      },
-                      {
-                        id: 3,
-                        name: 'Savings'
-                      }
-                  ]"
+                  :options="tags.all"
                   placeholder="Select tags"
                   track-by="id"
                   label="name"
@@ -83,6 +70,9 @@
 <script setup>
 import {onMounted, ref} from 'vue'
 import Multiselect from 'vue-multiselect'
+import { tagStore } from "@/store/tagStore";
+
+const tags = tagStore()
 
 const props = defineProps({
   savedData: {

@@ -71,6 +71,7 @@ import FinanceForm from "@/components/finance/FinanceForm";
 import { useDatabase } from "@/composables/useDatabase";
 import { userStore } from '@/store/userStore'
 import { transactionStore } from "@/store/transactionStore";
+import { tagStore } from "@/store/tagStore";
 import { onMounted, computed, ref, watch } from "vue";
 import ButtonComponent from "@/components/ButtonComponent";
 import { ArrowDownIcon, ArrowUpIcon, PlusIcon } from "@heroicons/vue/16/solid";
@@ -80,6 +81,7 @@ import { alertStore } from '@/store/alertStore'
 const alerts = alertStore()
 const user = userStore()
 const transactions = transactionStore()
+const tags = tagStore()
 const showModal = ref(false);
 const formRef = ref(null);
 const deposit = ref(false);
@@ -139,6 +141,12 @@ const handleFormSubmit = async () => {
 watch(showModal, () => {
   if (!showModal.value) {
     deposit.value = false
+  }
+})
+
+user.$subscribe((mutation) => {
+  if(mutation.type === 'patch object' && mutation.payload.loggedIn === true) {
+    tags.loadTags()
   }
 })
 
