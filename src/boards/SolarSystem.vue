@@ -37,7 +37,7 @@
     </div>
   </div>
 
-
+<div class="star"></div>
 </div>
 </template>
 
@@ -54,6 +54,62 @@ meta.content = "width=device-width, initial-scale=1.0, maximum-scale=5.0, user-s
 </script>
 
 <style scoped>
+.star {
+  width: 1px;
+  height: 1px;
+  background: transparent;
+  box-shadow:
+      -12vw -4vh 0 0 rgba(255, 255, 255, 0.8),
+      -14vw -41vh 1px 0 rgba(255, 220, 220, 0.7),
+      -16vw -42vh 2px 0 rgba(255, 255, 180, 0.6),
+      -18vw -30vh 1px 0 rgba(255, 245, 200, 0.75),
+      -20vw 10vh 2px 0 rgba(255, 255, 255, 0.9),
+      -22vw -20vh 1px 0 rgba(255, 200, 200, 0.8),
+      -24vw 25vh 2px 0 rgba(255, 255, 180, 0.6),
+      -26vw -15vh 3px 0 rgba(255, 255, 255, 0.7),
+      -28vw 40vh 1px 0 rgba(255, 245, 200, 0.85),
+      -30vw -10vh 2px 0 rgba(255, 220, 220, 0.7),
+      -32vw -35vh 3px 0 rgba(255, 255, 255, 0.6),
+      -34vw -50vh 2px 0 rgba(255, 200, 200, 0.75),
+      -36vw 15vh 1px 0 rgba(255, 255, 180, 0.9),
+      -38vw 5vh 2px 0 rgba(255, 245, 200, 0.7),
+      -40vw -60vh 3px 0 rgba(255, 255, 255, 0.8),
+      -42vw 30vh 1px 0 rgba(255, 220, 220, 0.6),
+      -44vw 50vh 2px 0 rgba(255, 255, 180, 0.7),
+      -46vw -25vh 3px 0 rgba(255, 245, 200, 0.85),
+      -48vw 20vh 1px 0 rgba(255, 255, 255, 0.75),
+      -50vw -55vh 2px 0 rgba(255, 220, 220, 0.8),
+      -52vw -50vh 2px 0 rgba(255, 245, 200, 0.7),
+      -54vw 40vh 1px 0 rgba(255, 200, 200, 0.8),
+      -56vw -35vh 3px 0 rgba(255, 255, 255, 0.6),
+      -58vw -50vh 2px 0 rgba(255, 255, 180, 0.7),
+      -60vw -15vh 1px 0 rgba(255, 220, 220, 0.9),
+      -62vw 30vh 3px 0 rgba(255, 255, 255, 0.75),
+      -64vw -45vh 2px 0 rgba(255, 245, 200, 0.8),
+      -66vw -10vh 1px 0 rgba(255, 255, 180, 0.6),
+      -68vw -25vh 2px 0 rgba(255, 220, 220, 0.7),
+      -70vw 5vh 3px 0 rgba(255, 255, 255, 0.85),
+      -72vw -5vh 1px 0 rgba(255, 245, 200, 0.9),
+      -74vw 20vh 2px 0 rgba(255, 255, 180, 0.4),
+      -76vw -30vh 3px 0 rgba(255, 220, 220, 0.55),
+      -78vw 50vh 2px 0 rgba(255, 255, 255, 0.6),
+      -80vw -60vh 1px 0 rgba(255, 220, 220, 0.5),
+      -82vw 15vh 3px 0 rgba(255, 255, 180, 0.7),
+      -84vw 25vh 2px 0 rgba(255, 245, 200, 0.55),
+      -86vw -20vh 1px 0 rgba(255, 200, 200, 0.65);
+}
+
+.star::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: inherit;
+  height: inherit;
+  box-shadow: inherit;
+}
+
+
 .planet.sun {
   -webkit-box-shadow: 1px -1px 15px 2px rgba(255,255,255,0.75);
   -moz-box-shadow: 1px -1px 15px 2px rgba(255,255,255,0.75);
