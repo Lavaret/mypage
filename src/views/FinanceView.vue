@@ -30,7 +30,10 @@
 
     <div v-if="user.loggedIn" class="flex flex-col gap-4 md:w-2/3 w-full text-left m-auto">
 
-      <StatCard :current-amount="totalAmount" :previous-amount="previousAmount"/>
+      <div class="flex-col sm:flex-row flex gap-3">
+        <StatCard :current-amount="totalAmount" :previous-amount="previousAmount" class="flex-1"/>
+        <TagStat class="flex-1" />
+      </div>
       <div class="flex gap-4 justify-center sm:ml-auto sm:justify-end flex-row">
         <ButtonComponent
             @click="showModal = true"
@@ -65,7 +68,7 @@
 <script setup>
 
 import FinanceList from "@/components/finance/FinanceList";
-import StatCard from "@/components/finance/StatCard";
+import StatCard from "@/components/finance/stats/StatCard";
 import LoginComponent from "@/components/finance/LoginComponent";
 import FinanceForm from "@/components/finance/FinanceForm";
 import { useDatabase } from "@/composables/useDatabase";
@@ -77,6 +80,7 @@ import ButtonComponent from "@/components/ButtonComponent";
 import { ArrowDownIcon, ArrowUpIcon, PlusIcon } from "@heroicons/vue/16/solid";
 import ModalComponent from "@/components/ModalComponent";
 import { alertStore } from '@/store/alertStore'
+import TagStat from "@/components/finance/stats/TagStat";
 
 const alerts = alertStore()
 const user = userStore()

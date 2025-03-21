@@ -63,7 +63,7 @@
                 v-for="tag in transaction.tags"
                 class="border text-center rounded-full px-2"
                 :style="{
-                  backgroundColor: `${tag.color}40`,
+                  backgroundColor: `${tag.color}90`,
                   borderColor: tag.color,
                 }"
             >
