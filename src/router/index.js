@@ -6,12 +6,14 @@ import NotFound from "@/views/NotFound";
 import HashView from "@/views/HashView";
 import BoardView from "@/views/BoardView";
 import SolarSystem from "@/boards/SolarSystem";
+import ThreeDimensionView from "@/views/ThreeDimensionView"
 import CellularAutomaton from "@/boards/CellularAutomaton";
 import Finance from "@/views/FinanceView";
 
 const routes = [
     { path: '/', name: 'HomeView', component: HomeView},
     { path: '/game', name: 'GameView', component: GameView},
+    { path: '/3d', name: 'ThreeDimensionView', component: ThreeDimensionView},
     { path: '/hash', name: 'HashView', component: HashView },
     { path: '/board', name: 'BoardView', component: BoardView },
     { path: '/404', component: NotFound },

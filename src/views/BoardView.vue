@@ -33,6 +33,13 @@
     >
       Game
     </BoardLink>
+    <BoardLink
+        :internal="true"
+        link="/3d"
+        class="hover:bg-red-600 bg-red-500 border-red-600 hover:red-pink-700"
+    >
+      3D View
+    </BoardLink>
   </div>
 </template>
 
