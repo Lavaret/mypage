@@ -1,5 +1,6 @@
 <template>
   <canvas width="1920" height="1080" id="my_canvas" ></canvas>
+  <div class="fps">FPS: <span id="fps"></span></div>
 </template>
 
 <script setup>
@@ -18,4 +19,13 @@ canvas {
   height: 100%;
   overflow: hidden
 }
+
+div.fps{
+  position: absolute;
+  color: hotpink;
+  font-size: 20px;
+  font-family: "Arial";
+  padding: 4px;
+}
+
 </style>
