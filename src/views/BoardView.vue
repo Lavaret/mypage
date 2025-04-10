@@ -36,9 +36,16 @@
     <BoardLink
         :internal="true"
         link="/3d"
-        class="hover:bg-red-600 bg-red-500 border-red-600 hover:red-pink-700"
+        class="hover:bg-red-600 bg-red-500 border-red-600 hover:border-red-700"
     >
       3D View
+    </BoardLink>
+    <BoardLink
+        :internal="false"
+        link="https://whimsical-gingersnap-bdb2ba.netlify.app/"
+        class="hover:bg-fuchsia-800 bg-fuchsia-700 border-fuchsia-800 hover:border-fuchsia-900"
+    >
+      Crystal Ball
     </BoardLink>
   </div>
 </template>
