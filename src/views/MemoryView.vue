@@ -1,5 +1,5 @@
 <template>
-  <div class="h-full w-full p-6 min-h-screen" style="background-color: #222630;">
+  <div class="h-full w-full p-4 sm:p-6 min-h-screen" style="background-color: #222630;">
     <div class="max-w-4xl mx-auto">
       <MemoryGame />
     </div>
