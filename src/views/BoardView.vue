@@ -41,11 +41,11 @@
       3D View
     </BoardLink>
     <BoardLink
-        :internal="false"
-        link="https://whimsical-gingersnap-bdb2ba.netlify.app/"
-        class="hover:bg-fuchsia-800 bg-fuchsia-700 border-fuchsia-800 hover:border-fuchsia-900"
+        :internal="true"
+        link="/memory"
+        class="hover:bg-purple-600 bg-purple-500 border-purple-600 hover:border-purple-700"
     >
-      Crystal Ball
+      Memo
     </BoardLink>
   </div>
 </template>

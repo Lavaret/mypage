@@ -9,6 +9,7 @@ import SolarSystem from "@/boards/SolarSystem";
 import ThreeDimensionView from "@/views/ThreeDimensionView"
 import CellularAutomaton from "@/boards/CellularAutomaton";
 import Finance from "@/views/FinanceView";
+import MemoryView from "@/views/MemoryView";
 
 const routes = [
     { path: '/', name: 'HomeView', component: HomeView},
@@ -19,7 +20,8 @@ const routes = [
     { path: '/404', component: NotFound },
     { path: '/board/solar-system', name: 'SolarSystem', component: SolarSystem},
     { path: '/board/cellular-automaton', name: 'CellularAutomaton', component: CellularAutomaton},
-    { path: '/finance', name: 'Finance', component: Finance}
+    { path: '/finance', name: 'Finance', component: Finance},
+    { path: '/memory', name: 'Memory', component: MemoryView}
 ]
 
 const router = createRouter({
