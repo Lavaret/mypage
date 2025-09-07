@@ -38,7 +38,7 @@
 
     <!-- Win Message -->
     <div v-if="gameWon" class="text-center mt-6 sm:mt-8 p-4 sm:p-6 bg-gray-800 rounded-lg border border-green-500">
-      <h3 class="text-xl sm:text-2xl font-bold text-green-400 mb-2">🎉 Congratulations! 🎉</h3>
+      <h3 class="text-xl sm:text-2xl font-bold text-green-400 mb-2">🎉 Congratulations! <span class="flip">🎉</span></h3>
       <p class="text-sm sm:text-base text-stone-200">You won in {{ moves }} moves with a score of {{ score }}!</p>
     </div>
   </div>
@@ -234,5 +234,10 @@ onMounted(() => {
     opacity: 0;
     transform: translateY(-50px) scale(1.2);
   }
+}
+
+.flip {
+  transform: scaleX(-1);
+  display: inline-block;
 }
 </style>

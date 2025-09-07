@@ -19,13 +19,13 @@
     >
       Tic tac toe
     </BoardLink>
-    <BoardLink
-        :internal="true"
-        link="/finance"
-        class="hover:bg-green-600 bg-green-500 border-green-600 hover:border-green-700"
-    >
-      Finance
-    </BoardLink>
+<!--    <BoardLink-->
+<!--        :internal="true"-->
+<!--        link="/finance"-->
+<!--        class="hover:bg-green-600 bg-green-500 border-green-600 hover:border-green-700"-->
+<!--    >-->
+<!--      Finance-->
+<!--    </BoardLink>-->
     <BoardLink
         :internal="true"
         link="/game"
