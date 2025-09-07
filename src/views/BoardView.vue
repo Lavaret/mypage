@@ -27,9 +27,16 @@
 <!--      Finance-->
 <!--    </BoardLink>-->
     <BoardLink
+        :internal="false"
+        link="https://quotespace.netlify.app/"
+        class="hover:bg-pink-600 bg-pink-500 border-pink-600 hover:border-pink-700"
+    >
+      Quotes
+    </BoardLink>
+    <BoardLink
         :internal="true"
         link="/game"
-        class="hover:bg-pink-600 bg-pink-500 border-pink-600 hover:border-pink-700"
+        class="hover:bg-green-600 bg-green-500 border-green-600 hover:border-green-700"
     >
       Game
     </BoardLink>
