@@ -10,6 +10,7 @@ import ThreeDimensionView from "@/views/ThreeDimensionView"
 import CellularAutomaton from "@/boards/CellularAutomaton";
 import Finance from "@/views/FinanceView";
 import MemoryView from "@/views/MemoryView";
+import SlideBoxView from "@/views/SlideBoxView.vue";
 
 const routes = [
     { path: '/', name: 'HomeView', component: HomeView},
@@ -21,7 +22,8 @@ const routes = [
     { path: '/board/solar-system', name: 'SolarSystem', component: SolarSystem},
     { path: '/board/cellular-automaton', name: 'CellularAutomaton', component: CellularAutomaton},
     { path: '/finance', name: 'Finance', component: Finance},
-    { path: '/memory', name: 'Memory', component: MemoryView}
+    { path: '/memory', name: 'Memory', component: MemoryView},
+    { path: '/slide', name: 'SlideBoxView', component: SlideBoxView},
 ]
 
 const router = createRouter({

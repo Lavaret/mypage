@@ -54,6 +54,13 @@
     >
       Memo
     </BoardLink>
+    <BoardLink
+        :internal="true"
+        link="/slide"
+        class="hover:bg-indigo-600 bg-indigo-500 border-indigo-600 hover:border-indigo-700"
+    >
+      Slide
+    </BoardLink>
   </div>
 </template>
 
